@@ -1,0 +1,101 @@
+<div class="global-container container-fluid card-Question">
+  <h4 class="my-2"><b> Update Question</b></h4>
+  <p style="font-size: 0.9vw;" class="text-justify text-wrap container-fluid text-format my-3">
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
+    aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+  </p>
+
+  <form style="font-size:0.8vw ;" class="task-form form-row my-4" [formGroup]="form">
+    <section class=" d-flex flex-row container-fluid justify-content-between">
+
+      <div class="col-sm-5 flex-column">
+        <label for="language"><span>
+            <i class="fa fa-user"></i>
+          </span>
+          Please select the language :
+        </label>
+        <select style="font-size:0.8vw ;" name="language" formControlName="language" class="form-select form-select-sm">
+          <option [ngValue]="undefined" selected disabled>-language-</option>
+          <option *ngFor="let item of languages" value="{{item.value}}">{{item.viewValue}}</option>
+        </select>
+
+        <div *ngIf="f.language.errors?.required " class="text text-danger">
+          language is required
+        </div>
+      </div>
+
+      <div class="col-sm-5 flex-column">
+        <label for="typeQuestion">
+          <span>
+            <i class="fa fa-user"></i>
+          </span>
+          Please select the Type :
+        </label>
+        <select style="font-size:0.8vw ;" name="typeQuestion" formControlName="typeQuestion"
+          class="form-select form-select-sm">
+          <option [ngValue]="undefined" selected disabled>-typeQuestion-</option>
+          <option *ngFor="let item of typeQuestions trackBy: trackQuestionTypeById"
+            [ngValue]="item?.id === form.value.typeQuestion?.id ? form.value.typeQuestion : item">{{item.text}}</option>
+        </select>
+        <div *ngIf="f.typeQuestion.errors?.required " class="text text-danger">
+          questionType is required
+        </div>
+      </div>
+    </section>
+
+    <section class="container-fluid my-4">
+      <div>
+        <label for="card-num">Please add the question text :</label>
+        <input type="text" name="text" id="text" formControlName="text" required
+          oninput="this.value=this.value.toUpperCase()" />
+      </div>
+      <div *ngIf="f.text.errors?.required " class="text text-danger">
+        text is required
+      </div>
+    </section>
+
+    <section class="container-fluid my-4">
+      <div class="d-flex flex-row flex-wrap flex-container d-grid gap-3" formArrayName="answerChoices">
+        <ng-container *ngFor="let pattern of getControls(form, 'answerChoices'); let i = index">
+          <ng-container *ngFor="let pattern of getControls(form, 'answerChoices'); let i = index">
+            <div style="font-size:0.8vw ;" [formGroupName]="i" class="position-relative col-md-3">
+              <input placeholder="Option {{i+1}}" style="font-size:0.8vw ;" type="text" name="text" formControlName="text"
+                class="form-control inner" />
+                <div class="alert alert-danger mt-2" *ngIf="form.get('answerChoices.'+i+'.text')?.invalid && (form.get('answerChoices.'+i+'.text')?.dirty || form.get('answerChoices.'+i+'.text')?.touched)" >Invalid Input. Please enter a valid one like :  'yes (1 point)'</div>
+                <button type="button" class="position-absolute btn icon-delete" (click)="removeItem(i)">
+                <i class="bi bi-trash-fill"></i>
+              </button>
+            </div>
+          </ng-container>
+        </ng-container>
+      </div>
+
+      <div class="addoption-div" id="addOptionContainer">
+        <div class="adminprofile-div">
+          <div type="button" (click)="addItem()" class="icon-color">
+            <i class="bi bi-plus-lg icon-color"></i> &nbsp;
+            <b>
+              Add Option
+              <option value=""></option>
+            </b>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <section class="d-flex flex-row flex-wrap justify-content-end btn-">
+      <button style="font-size:0.8vw ;" class="btn btn-outline-primary px-4 d-flex d-grid flew-row gap-2"
+        (click)="goToPage('/home/question/list')">
+        <i class="bi bi-clipboard-x"></i>
+        Reset
+      </button>
+      <button style="font-size:0.8vw ;" (click)="onSubmit()" class="btn btn-primary px-4 d-flex flex-row d-grid gap-2"
+        rippleEffect>
+        <i class="bi bi-clipboard-plus"></i>
+        Save
+      </button>
+    </section>
+
+  </form>
+</div>

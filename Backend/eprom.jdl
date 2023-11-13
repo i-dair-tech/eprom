@@ -1,0 +1,110 @@
+
+
+entity Survey {
+	name String required,
+    type String,
+    description String,
+    createdBy String,
+    createdDate Instant,
+    lastModifiedBy String,
+    lastModifiedDate Instant,
+    isArchived Boolean,
+    archivedDate Instant
+}
+
+
+entity Question {
+	text String,
+    createdBy String,
+    createdDate Instant,
+    lastModifiedBy String,
+    lastModifiedDate Instant,
+    isArchived Boolean,
+    archivedDate Instant
+}
+
+
+entity TypeQuestion {
+	text String,
+    createdBy String,
+    createdDate Instant,
+    lastModifiedBy String,
+    lastModifiedDate Instant,
+    isArchived Boolean,
+    archivedDate Instant
+}
+
+
+entity Answer {
+	text String,
+    createdBy String,
+    createdDate Instant,
+    lastModifiedBy String,
+    lastModifiedDate Instant,
+    isArchived Boolean,
+    archivedDate Instant
+    
+}
+
+
+entity Language {
+   language String,
+   languageCode String
+}
+
+entity QuestionOrder {
+   
+}
+
+
+
+/**
+ * Relations
+ */
+
+
+//Many To Many
+
+relationship ManyToMany {
+	Question to Survey
+}
+
+
+relationship ManyToMany {
+	Question to Language
+}
+
+
+//One To Many
+relationship OneToMany {
+	TypeQuestion to Question {typeQuestion}
+}
+
+
+
+relationship OneToOne {
+	Answer{question} to Question
+}
+
+
+relationship OneToMany {
+	Survey to QuestionOrder
+}
+
+
+relationship OneToMany {
+	Question{question} to QuestionOrder
+}
+
+// Set pagination options
+paginate Question with infinite-scroll
+
+
+// Use Data Transfer Objects (DTO)
+// dto * with mapstruct
+
+// Set service options to all except few
+service all with serviceImpl 
+
+// Set an angular suffix
+// angularSuffix * with mySuffix

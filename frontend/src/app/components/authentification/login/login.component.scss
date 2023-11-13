@@ -1,0 +1,392 @@
+.header {
+    display: flex;
+    justify-content: space-around;
+    padding-bottom: 3%;
+}
+
+.header {
+    display: flex;
+    justify-content: space-around;
+    padding-bottom: 3%;
+}
+
+img {
+    margin-left: 5% !important;
+    width: 60px;
+    height: 60px;
+
+    @media screen and (max-width: 800px) {
+        width: 30px;
+        height: 30px;
+
+    }
+}
+
+.costum-label {
+    font-style: normal;
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 18px;
+    /* identical to box height, or 129% */
+    color: #747474;
+}
+
+.form-control {
+    border-radius: 0rem !important;
+    height: 65px !important;
+}
+
+.position-form {
+    display: flex;
+    justify-content: center;
+}
+
+.btn-mobile-id {
+    margin-top: 5%;
+    height: 52px;
+    width: 100% !important;
+    border: 1px solid #DCDADAFF;
+    font-size: 20px !important;
+    background-color: #DCDADAFF !important;
+    color: #777474FF !important;
+    border-radius: 0px;
+}
+
+p {
+    color: #00B0B0;
+}
+
+span {
+    color: #a80505;
+}
+
+.position-card {
+    display: flex;
+    justify-content: center;
+    height: auto !important;
+}
+
+.language {
+    color: var(--text);
+    cursor: pointer;
+    direction: rtl;
+    font-size: var(--font-size-m2);
+    font-weight: 500;
+    letter-spacing: 0;
+    margin-left: 48px;
+    min-height: 20px;
+    min-width: 49px;
+}
+
+.invalid-input {
+    color: red;
+}
+
+h1 {
+    font-style: normal;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 33px;
+    color: #198989;
+}
+
+h3 {
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 21px;
+    /* identical to box height, or 131% */
+
+    text-align: center;
+
+    color: #333333;
+}
+
+.card1 {
+    width: 40%;
+    height: auto !important;
+
+    @media screen and (max-width : 767px) {
+        width: 80%;
+    }
+
+    border-radius: 1em !important;
+}
+
+.p-btn-2 {
+    font-style: normal;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 22px;
+    /* identical to box height */
+
+    letter-spacing: 0.4px;
+
+    /* Background */
+
+    color: #198989;
+
+
+    /* Inside auto layout */
+
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+}
+
+.p-btn {
+    font-style: normal;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 22px;
+    /* identical to box height */
+
+    letter-spacing: 0.4px;
+
+    /* Background */
+
+    color: #FAFAFA;
+
+
+    /* Inside auto layout */
+
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+}
+
+.title {
+    font-style: normal;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 123.9%;
+    /* or 20px */
+    text-align: center;
+    /* Primary */
+    color: black;
+}
+
+.acceuil {
+    margin-top: 3%;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 12px;
+    line-height: 18px;
+    /* identical to box height, or 150% */
+    color: #068080;
+}
+
+.costum-input {
+    box-sizing: border-box;
+    left: 0%;
+    right: 0%;
+    top: 28.21%;
+    bottom: 0%;
+    height: 56px !important;
+    border: 1px solid #747474;
+}
+
+::ng-deep code-input span input {
+    height: 43px !important;
+}
+
+#tunis {
+    color: red;
+}
+
+.log {
+    text-align: center !important;
+    font-style: normal;
+    color: #545454;
+}
+
+.section-divider {
+    height: 0;
+    border-top: 1px solid #DDD;
+    text-align: center;
+    margin-top: 40px;
+    margin-bottom: 40px;
+}
+
+.section-divider>span {
+    color: rgba(0, 0, 0, 0.4);
+    background: #FAFAFA;
+    display: inline-block;
+    position: relative;
+    padding: 0 17px;
+    top: -11px;
+    font-size: 15px;
+}
+
+.template-demo>.btn {
+    margin-right: 0.5rem !important;
+
+}
+
+.template-demo {
+    margin-top: 0.5rem !important;
+    text-align: center;
+}
+
+.btn-dribbble {
+    background: #ea4c89;
+    color: #ffffff;
+}
+
+.btn-dribbble:hover,
+.btn-dribbble:focus {
+    background: #ea4c89;
+    color: #ffffff;
+}
+
+.btn-linkedin {
+    background: #0177b5;
+    color: #ffffff;
+}
+
+.btn-instagram {
+    background: #dc4a38;
+    color: #ffffff;
+}
+
+.btn-facebook:hover,
+.btn-facebook:focus {
+    background: #2d4278;
+    color: #ffffff;
+}
+
+
+
+.btn-twitter:hover,
+.btn-twitter:focus {
+    background: #1b8dbf;
+    color: #ffffff;
+}
+
+
+
+.btn-linkedin:hover,
+.btn-linkedin:focus {
+    background: #015682;
+    color: #ffffff;
+}
+
+.btn-instagram:hover,
+.btn-instagram:focus {
+    background: #bf3322;
+    color: #ffffff;
+}
+
+.eyeicon {
+    position: absolute;
+    width: auto;
+    bottom: 10px;
+    right: 10px;
+    margin-top: 0;
+    color: rgb(205, 201, 201)
+}
+
+.enveloppe {
+    position: absolute;
+    width: auto;
+    bottom: 10px;
+    right: 10px;
+    margin-top: 0;
+    color: rgb(205, 201, 201);
+}
+
+mat-toolbar {
+    background-color: none !important;
+}
+
+.content {
+    min-height: 100% !important;
+    ;
+    background: url("../../../../assets/img/background.png") !important;
+    /*replace image.jpg with path to your image*/
+    background-size: cover !important;
+    background-repeat: no-repeat !important;
+    background-position: center center !important;
+}
+
+.img-style {
+    width: 165px;
+    height: 50px !important;
+
+    @media screen and (max-width: 800px) {
+        width: 30px;
+        height: 30px;
+    }
+}
+
+.d-flex {
+    color: red !important;
+}
+
+.ml-5 {
+    margin-left: 5em !important;
+}
+
+#username {
+    border-radius: 0.5em !important; 
+    height: 40px !important;
+}
+
+#password {
+    border-radius: 0.5em !important;
+    height: 40px !important;
+}
+
+#submitButton {
+    background: linear-gradient(rgba(2, 169, 206, 0.45) 90.6deg, 21.57%, #02A9CE 97.55%);
+    height: 50px;
+    border-radius: 50px;
+}
+
+#errorMsg {
+    color: black;
+    text-align: center;
+}
+
+p#account {
+    margin-top: 1em !important;
+    color: #545454 !important;
+    font-size: 13px;
+}
+
+p#getAccount {
+    font-style: normal;
+    font-weight: 500;
+    font-size: 13px;
+    line-height: 14px;
+    margin-top: -1em !important;
+    color: #545454;
+}
+
+p#forgotPassword {
+    font-style: normal;
+    font-weight: 500;
+    font-size: 13px;
+    line-height: 14px;
+    margin-top: -1em !important;
+    margin-bottom: -1.5em !important;
+    color: #02A9CE
+}
+
+#insideContent {
+    padding: 3% !important;
+}
+
+#toRegister {
+    cursor: pointer !important;
+    color: white !important;
+}
+
+#signIn {
+    color: black !important;
+}
+
+#msgCredential {
+    color: #545454;
+    font-size: 12px;
+}

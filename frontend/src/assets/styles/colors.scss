@@ -1,0 +1,24 @@
+$primary: (
+    side-bar-blue: #081A51,
+    light-blue-button: #0E75BB,
+    dark-button: #1F1F20,
+    gray-text:#888889,
+    dark-text:#1F1F20,
+    red-red:#CF3A59
+);
+
+$secondary: (
+    red: hsl(0, 87%, 67%)
+);
+
+$neutral: (
+    gray: hsl(0, 0%, 75%), 
+    grayish-violet: hsl(257, 7%, 63%),
+    bg: hsl(230, 25%, 95%),
+);
+
+$box-shadow: (
+    cta: 0 4px 8px hsla(180, 66%, 49%, 0.05),
+    shorten-it: 0 8px 16px hsla(256, 26%, 20%, 0.15),
+    item: 0 2px 4px hsla(260, 8%, 14%, 0.05)
+);

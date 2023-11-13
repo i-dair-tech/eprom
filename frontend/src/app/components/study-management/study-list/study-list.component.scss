@@ -1,0 +1,110 @@
+.global-container {
+  position: absolute;
+  top: 0;
+  right: 2;
+  bottom: 5; 
+  left: 3;
+  margin-top: 8vh !important;
+}
+
+.card-Question {
+  background-color: #fff;
+  border: 1px solid rgba(217, 217, 217, 0.5);
+  box-shadow: 0px 4px 4px rgba(255, 255, 255, 0.25);
+  border-radius: 8px;
+}
+.add-icon{
+  width: 1.6vw; 
+  height: 1.6vw;
+}
+
+.add-btn{
+  font-size:0.8vw;
+}
+
+table th {
+  font-size: 0.9vw;
+}
+table tbody{
+  font-size: 0.8vw;
+}
+.pagination-{
+  font-size: 0.6vw;
+}
+div input{
+  font-size: 0.8vw;
+}
+.icon-{
+  font-size: 0.6vw !important;
+}
+.pagination-{
+  font-size: 0.6vw;
+}
+.delete-icon:hover{
+  background-color: #D50000  ;
+  color: #fff  ;
+  padding-top: 0.7vw;
+  padding-bottom: 0.7vw;
+}
+
+.update-icon:hover{
+  background-color: #1565C0; 
+  color: #fff;
+}
+.show-details-btn:hover{
+  background-color: #458871;
+  color:#fff;
+}
+
+.icons-{
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+}
+@media screen and (max-width: 576px) {
+  table{
+    overflow: scroll;
+  }
+  .col-survey{
+    text-align: center !important;
+  }
+  .add-icon{
+    width: 1.5rem !important; 
+    height: 1.5rem !important;
+  }
+  .add-btn{
+    font-size:0.7rem !important;
+    width: 7rem !important;
+  }
+  .icon-add{
+    width: 30%;
+    height: 20%;
+  }
+
+  table th {
+    font-size: 0.6rem;
+  }
+  table tbody{
+    font-size: 0.5rem;
+  }
+  .pagination-{
+    font-size: 0.9rem !important;
+  }
+  div input{
+    font-size: 1rem !important;
+  }
+  .icon-{
+    font-size: 0.6rem !important;
+  }
+  .pagination-{
+    font-size: 0.6vw;
+  }
+}
+
+@media screen and (max-width: 768px) {}
+
+@media screen and (min-width: 992px) {
+  .icon-size{
+    font-size: 1.1vw;
+  }
+}

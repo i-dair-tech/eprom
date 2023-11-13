@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.6.xsd">
+    <!--
+        Added the constraints for entity Question.
+    -->
+    <changeSet id="20220604224522-2" author="jhipster">
+
+        <addForeignKeyConstraint baseColumnNames="question_id"
+                                 baseTableName="rel_question__answer_choice"
+                                 constraintName="fk_rel_question__answer_choice__question_id, fk_question__type_question_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="eprom_question"/>
+
+        <addForeignKeyConstraint baseColumnNames="answer_choice_id"
+                                 baseTableName="rel_question__answer_choice"
+                                 constraintName="fk_rel_question__answer_choice__answer_choice_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="eprom_answer_choice"/>
+
+        <addForeignKeyConstraint baseColumnNames="type_question_id"
+                                 baseTableName="eprom_question"
+                                 constraintName="fk_question__type_question_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="eprom_type_question"/>
+    </changeSet>
+</databaseChangeLog>

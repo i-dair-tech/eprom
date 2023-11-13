@@ -1,0 +1,122 @@
+<div>
+  <h2 id="page-heading" data-cy="SurveyHeading">
+    <span>Surveys</span>
+
+    <div class="d-flex justify-content-end">
+      <button
+        class="btn btn-info me-2"
+        (click)="loadAll()"
+        [disabled]="isLoading"
+      >
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span>Refresh List</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-survey"
+        [routerLink]="['/survey/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span> Create a new Survey </span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="surveys?.length === 0">
+    <span>No surveys found</span>
+  </div>
+
+  <div
+    class="table-responsive"
+    id="entities"
+    *ngIf="surveys && surveys.length > 0"
+  >
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr>
+          <th scope="col"><span>ID</span></th>
+          <th scope="col"><span>Name</span></th>
+          <th scope="col"><span>Type</span></th>
+          <th scope="col"><span>Description</span></th>
+          <th scope="col"><span>Question Order</span></th>
+          <th scope="col"><span>Created By</span></th>
+          <th scope="col"><span>Created Date</span></th>
+          <th scope="col"><span>Last Modified By</span></th>
+          <th scope="col"><span>Last Modified Date</span></th>
+          <th scope="col"><span>Is Archived</span></th>
+          <th scope="col"><span>Archived Date</span></th>
+          <th scope="col"><span>Question</span></th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr
+          *ngFor="let survey of surveys; trackBy: trackId"
+          data-cy="entityTable"
+        >
+          <td>
+            <a [routerLink]="['/survey', survey.id, 'view']">{{ survey.id }}</a>
+          </td>
+          <td>{{ survey.name }}</td>
+          <td>{{ survey.type }}</td>
+          <td>{{ survey.description }}</td>
+          <td>{{ survey.questionOrder }}</td>
+          <td>{{ survey.createdBy }}</td>
+          <td>{{ survey.createdDate | formatMediumDatetime }}</td>
+          <td>{{ survey.lastModifiedBy }}</td>
+          <td>{{ survey.lastModifiedDate | formatMediumDatetime }}</td>
+          <td>{{ survey.isArchived }}</td>
+          <td>{{ survey.archivedDate | formatMediumDatetime }}</td>
+          <td>
+            <span *ngFor="let question of survey.questions; let last = last">
+              <a
+                class="form-control-static"
+                [routerLink]="['/question', question.id, 'view']"
+                >{{ question.id }}</a
+              >{{ last ? "" : ", " }}
+            </span>
+          </td>
+          <td class="text-end">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/survey', survey.id, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline">View</span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/survey', survey.id, 'edit']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline">Edit</span>
+              </button>
+
+              <button
+                type="submit"
+                (click)="delete(survey)"
+                class="btn btn-danger btn-sm"
+                data-cy="entityDeleteButton"
+              >
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

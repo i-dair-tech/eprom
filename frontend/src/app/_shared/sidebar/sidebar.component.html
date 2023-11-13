@@ -1,0 +1,146 @@
+<link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+  <div class="position-absolut" [ngClass]="!expand ? 'sidebar close' : 'sidebar'" >
+    <div class="logo-details">
+      <span class='p-1' (click)="expand=!expand" [ngStyle]="{'display':!expand ? 'block' : 'none' }">
+        <img src="../../../assets/img/Mini-EpromLogo.png" alt="logo eprom">
+      </span>
+      <span class="logo_name" (click)="expand=!expand" [ngStyle]="{'display':expand ? 'block' : 'none' }">
+        <img class="d-flex align-content-center align-items-center justify-content-center" src="../../../assets/img/Extra-EpromLogo.png" alt="logo eprom">
+      </span>
+    </div>
+    <ul class="nav-links">
+      <li>
+        <a routerLink="landingPage">
+          <i class='bx bxs-dashboard' (click)="expand=!expand" ></i>
+          <span class="link_name">Dashboard</span>
+        </a>
+        
+      </li>
+      <li  [ngClass]="!study ? '' : 'showMenu'" *ngIf ="!isPatient">
+        <div class="icon-link">
+          <a routerLink="study/list">
+            <i class='bx bx-collection' ></i>
+            <span class="link_name">Studies</span>
+          </a>
+          <i class='bx bxs-chevron-down arrow' (click)="study=!study"></i>
+        </div>
+        <ul class="sub-menu">
+          <li><a class="link_name" routerLink="study/list">Study Management</a></li>
+          <li><a routerLink="study/list">Studies List</a></li>
+          <li><a routerLink="study/add">Add Study</a></li>
+        </ul>
+      </li>
+      <li  [ngClass]="!survey ? '' : 'showMenu'" *ngIf ="!isPatient">
+        <div class="icon-link">
+          <a routerLink="survey/list">
+            <i class='bx bx-list-check' ></i>
+            <span class="link_name">Surveys</span>
+          </a>
+          <i class='bx bxs-chevron-down arrow' (click)="survey=!survey" ></i>
+        </div>
+        <ul class="sub-menu">
+          <li><a class="link_name" routerLink="survey/list">Survey Management</a></li>
+          <li><a routerLink="survey/list">Survey List</a></li>
+          <li><a routerLink="survey/add">Add Survey</a></li>
+        </ul>
+      </li>
+      <li [ngClass]="!question ? '' : 'showMenu'" *ngIf ="!isPatient">
+        <div class="icon-link">
+        <a routerLink="question/list">
+          <i class='bx bx-question-mark' ></i>
+          <span class="link_name">Questions</span>
+        </a>
+        <i class='bx bxs-chevron-down arrow' (click)="question=!question" ></i>
+        </div>
+        <ul class="sub-menu ">
+          <li><a class="link_name" routerLink="question/list">Questions Management</a></li>
+          <li><a routerLink="question/list">Questions List</a></li>
+          <li><a routerLink="question/add">Add Questions</a></li>
+          <li><a routerLink="question/configuration">Configuration</a></li>
+        </ul>
+      </li>
+      <li  [ngClass]="!user ? '' : 'showMenu'" *ngIf="hasAuthority && !isPatient">
+        <div class="icon-link">
+          <a routerLink="user/list">
+            <i class='bx bxs-user-check' ></i>
+            <span class="link_name">Users</span>
+          </a>
+          <i class='bx bxs-chevron-down arrow' (click)="user=!user" ></i>
+        </div>
+        <ul class="sub-menu">
+          <li><a class="link_name" routerLink="user/list">Users Management</a></li>
+          <li><a routerLink="user/list">Users List</a></li>
+          <li><a routerLink="user/add">Add User</a></li>
+        </ul>
+      </li>
+
+      <li [ngClass]="!report ? '' : 'showMenu'" *ngIf ="!isPatient">
+        <div class="icon-link">
+          <a routerLink="reports" >
+            <i class='bx bxs-report'   ></i>
+            <span class="link_name">Reports</span>
+          </a>
+          <i class='bx bxs-chevron-down arrow' (click)="report=!report" ></i>
+        </div>
+        <ul class="sub-menu">
+          <li><a class="link_name" routerLink="reports">Reports</a></li>
+          <li><a routerLink="reports/per-user">Per Users</a></li>
+          <li><a routerLink="reports/per-survey">Per Surveys</a></li>
+          <li><a routerLink="reports/per-study">Per Studies</a></li>
+        </ul>
+      </li>
+
+
+      <li  [ngClass]="!surveyPatient ? '' : 'showMenu'" *ngIf ="isPatient">
+        <div class="icon-link">
+          <a routerLink="survey-patient/list">
+            <i class='bx bxs-paste' ></i>
+            <span class="link_name">Invitations</span>
+          </a>
+          <i class='bx bxs-chevron-down arrow' (click)="surveyPatient=!surveyPatient" ></i>
+        </div>
+        <ul class="sub-menu">
+          <li><a class="link_name" routerLink="survey-patient/list">Invitations</a></li>
+          <li><a routerLink="survey-patient/list">Surveys List</a></li>
+        </ul>
+      </li>
+      <br>
+      <br>
+      <li>
+        <a routerLink="logs" *ngIf ="!isPatient">
+          <i class='bx bx-history'></i>
+          <span class="link_name">History</span>
+        </a>
+        <ul class="sub-menu blank">
+          <li><a class="link_name" routerLink="logs">History</a></li>
+        </ul>
+      </li>
+      <li>
+        <a routerLink="profile">
+          <i class='bx bx-cog' ></i>
+          <span class="link_name">Profile </span>
+        </a>
+        <ul class="sub-menu blank">
+          <li><a class="link_name" routerLink="profile">Profile</a></li>
+        </ul>
+      </li>
+      <li>
+    <div class="profile-details px-3">
+      <div class="name-job">
+        <div class="profile_name">
+          <a routerLink="profile">{{userInfo.login}}</a>
+        </div>
+        <div class="job">{{role}}</div>
+      </div>
+      <i class='bx bx-log-out' (click)="logout()"></i>
+    </div>
+  </li>
+</ul>
+  </div>
+ <section class="home-section">
+    <div class="home-content">
+        <!-- <i class='bx bx-menu' (click)="expand=!expand"></i> -->
+        <router-outlet></router-outlet>
+    </div>
+   
+</section> 

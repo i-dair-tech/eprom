@@ -1,0 +1,114 @@
+<div>
+  <h2 id="page-heading" data-cy="AnswerHeading">
+    <span>Answers</span>
+
+    <div class="d-flex justify-content-end">
+      <button
+        class="btn btn-info me-2"
+        (click)="loadAll()"
+        [disabled]="isLoading"
+      >
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span>Refresh List</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-answer"
+        [routerLink]="['/answer/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span> Create a new Answer </span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="answers?.length === 0">
+    <span>No answers found</span>
+  </div>
+
+  <div
+    class="table-responsive"
+    id="entities"
+    *ngIf="answers && answers.length > 0"
+  >
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr>
+          <th scope="col"><span>ID</span></th>
+          <th scope="col"><span>Text</span></th>
+          <th scope="col"><span>Created By</span></th>
+          <th scope="col"><span>Created Date</span></th>
+          <th scope="col"><span>Last Modified By</span></th>
+          <th scope="col"><span>Last Modified Date</span></th>
+          <th scope="col"><span>Is Archived</span></th>
+          <th scope="col"><span>Archived Date</span></th>
+          <th scope="col"><span>Question</span></th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr
+          *ngFor="let answer of answers; trackBy: trackId"
+          data-cy="entityTable"
+        >
+          <td>
+            <a [routerLink]="['/answer', answer.id, 'view']">{{ answer.id }}</a>
+          </td>
+          <td>{{ answer.text }}</td>
+          <td>{{ answer.createdBy }}</td>
+          <td>{{ answer.createdDate | formatMediumDatetime }}</td>
+          <td>{{ answer.lastModifiedBy }}</td>
+          <td>{{ answer.lastModifiedDate | formatMediumDatetime }}</td>
+          <td>{{ answer.isArchived }}</td>
+          <td>{{ answer.archivedDate | formatMediumDatetime }}</td>
+          <td>
+            <div *ngIf="answer.question">
+              <a [routerLink]="['/question', answer.question?.id, 'view']">{{
+                answer.question?.id
+              }}</a>
+            </div>
+          </td>
+          <td class="text-end">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/answer', answer.id, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline">View</span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/answer', answer.id, 'edit']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline">Edit</span>
+              </button>
+
+              <button
+                type="submit"
+                (click)="delete(answer)"
+                class="btn btn-danger btn-sm"
+                data-cy="entityDeleteButton"
+              >
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

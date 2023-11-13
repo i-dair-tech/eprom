@@ -1,0 +1,74 @@
+<div class="global-container container-fluid card-Question">
+  <h4 class="my-2"><b> Update Survey </b></h4>
+
+  <div class="progress">
+    <div class="progress-bar" [style.width]="barwidth + '%'"></div>
+  </div>
+
+  <form [formGroup]="form" autocomplete="off">
+    <div *ngIf="!show" id="1" class="form-group col-sm-7">
+
+      <div class="container-fluid my-4">
+        <label for="title">Survey Title:</label>
+        <input type="text" class="form-control" name="title" id="title" formControlName="title"
+          oninput="this.value=this.value.toUpperCase()">
+      </div>
+
+      <div class="container-fluid my-4">
+        <label for="topic">Survey Topic:</label>
+        <input type="text" class="form-control" name="topic" id="topic" formControlName="topic"
+          oninput="this.value=this.value.toUpperCase()">
+      </div>
+
+      <div class="container-fluid my-4">
+        <label for="description">Survey Description:</label>
+        <textarea type="text" class="form-control" name="description" id="description"
+          formControlName="description"> </textarea>
+      </div>
+    </div>
+
+    <div *ngIf="show" id="2" class="form-group"> 
+      <div class="row container-fluid my-4">
+        <ngx-datatable tableClass="table table-striped table-bordered table-hover" 
+      [tableId]="'checkbox'" [data]="rows" [options]="options" 
+        [columns]="columns"   (checkboxClick)="onCheckboxClick($event)" >
+        <ngx-caption>
+          <div class="row header-tab">
+            <div class="col-sm-12 col-xs-12 col-md-12 ">
+              <b>
+                <i class="bi bi-card-list"></i>
+                Questions List
+              </b>
+            </div>
+          </div>
+        </ngx-caption>
+      </ngx-datatable>
+      </div>
+    </div>
+
+    <div *ngIf="show" id="2" class="form-group">
+      <div class="row container-fluid my-4" *ngIf="chkBoxSelected.length !==0">
+        <div cdkDropList #todoList="cdkDropList" [cdkDropListData]="chkBoxSelected" class="example-list"
+          (cdkDropListDropped)="drop($event)">
+          <div class="example-box mt-2 col-md-12" *ngFor="let item of chkBoxSelected" cdkDrag>{{item.text}}</div>
+        </div>
+      </div>
+    </div>
+
+    <section class="d-flex flex-row flex-wrap my-5 justify-content-end btn-">
+      <button type="submit" (click)="previous()" [disabled]="!pervshow"
+        class="d-flex d-grid gap-2 btn btn-primary px-4">
+        <a href="#1"></a>
+        <i class="bi bi-arrow-bar-left"></i>
+        Previous
+      </button>&nbsp;
+      <button type="submit" (click)="next()" [disabled]="!nextshow" class="d-flex d-grid gap-2 btn btn-primary px-5">
+        <a href="#2"></a>
+        Next
+        <i class="bi bi-arrow-bar-right"></i>
+      </button>
+      <button type="submit" *ngIf="saveshow" (click)="save()" class="btn btn-primary">save</button>
+    </section>
+  </form>
+
+</div>

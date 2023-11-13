@@ -1,0 +1,107 @@
+<div class="global-container container-fluid col-md-12">
+  <div class="container-fluid card-Question my-4 py-3 overflow-auto">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+          <div class="col-sm-7">
+
+          <section class="d-flex align-content-center align-items-center">
+            <img class="add-icon" src="../../../../assets/icons/icon-plus.png">&nbsp;&nbsp;
+            <h4 class="my-2"><b> Add new User </b></h4>
+          </section>
+  
+          <div style="font-size:0.8vw ;" class="my-4">
+            <label class="form-label">Login</label>
+            <input style="font-size:0.8vw ;" type="text" class="form-control" name="login" formControlName="login" />
+    
+            <div *ngIf="editForm.get('login')!.invalid && (editForm.get('login')!.dirty || editForm.get('login')!.touched)">
+              <small class="form-text text-danger" *ngIf="editForm.get('login')?.errors?.required" >
+                This field is required.
+              </small>
+            </div>
+          </div>
+     
+          <section class="d-flex flex-row flex-wrap  justify-content-between mb-3">
+            <div style="font-size:0.8vw ;" class="col-md-5">
+              <label class="form-label">First name</label>
+              <input style="font-size:0.8vw ;" type="text" class="form-control" name="firstName" formControlName="firstName" />
+              <div *ngIf="editForm.get('firstName')!.invalid && (editForm.get('firstName')!.dirty || editForm.get('firstName')!.touched)">
+              </div>
+            </div>
+      
+            <div style="font-size:0.8vw ;" class="col-md-5">
+              <label class="form-label">Last name</label>
+              <input style="font-size:0.8vw ;" type="text" class="form-control" name="lastName" formControlName="lastName" />
+              <div *ngIf="editForm.get('lastName')!.invalid && (editForm.get('lastName')!.dirty || editForm.get('lastName')!.touched)">
+              </div>
+            </div>
+          </section>
+    
+          <div style="font-size:0.8vw ;" class="mb-3">
+            <label class="form-label">Email</label>
+            <input style="font-size:0.8vw ;" type="email" class="form-control" name="email" formControlName="email" />
+    
+            <div *ngIf="editForm.get('email')!.invalid && (editForm.get('email')!.dirty || editForm.get('email')!.touched)">
+              <small class="form-text text-danger" *ngIf="editForm.get('email')?.errors?.required" >
+                This field is required.
+              </small>
+    
+              <small
+                class="form-text text-danger"
+                *ngIf="editForm.get('email')?.errors?.email"
+              >
+                Your email is invalid.
+              </small>
+            </div>
+          </div>
+    
+          <div style="font-size:0.8vw ;" class="form-check mb-3">
+            <label class="form-check-label" for="activated">
+              <input
+                style="font-size:0.8vw ;"
+                class="form-check-input"
+                [attr.disabled]="editForm.value.id === undefined ? 'disabled' : null"
+                type="checkbox"
+                id="activated"
+                name="activated"
+                formControlName="activated"
+              />
+              <span style="font-size:0.8vw ;">Activated</span>
+            </label>
+          </div>
+          
+          <div style="font-size:0.8vw ;" class="mb-3" *ngIf="languages && languages.length > 0">
+            <label>Language</label>
+            <select style="font-size:0.8vw ;" class="form-control mt-2" id="langKey" name="langKey" formControlName="langKey">
+              <option *ngFor="let language of languages" [value]="language">{{language}}</option>
+            </select>
+          </div>
+    
+  
+          <div style="font-size:0.8vw ;" class="mb-3 select select--multiple">
+              <label class="mb-2">Profiles</label>
+          <ng-multiselect-dropdown #multiSelect
+        [placeholder]="'Select authority(ies)'" 
+        [data]="authorities" 
+        [settings]="settings"
+        [disabled]="false"
+        (onSelect)="onItemSelect($event)" 
+        (onDeSelect)="onDeSelect($event)"
+        (onSelectAll)="onSelectAll($event)"
+        (onDeSelectAll)="onDeSelectAll($event)">
+      </ng-multiselect-dropdown>
+        </div>
+      </div>
+  
+      <section class="d-flex flex-row flex-wrap my-5 justify-content-end btn-">
+        <button style="font-size:0.8vw ;" type="button" class="btn btn-outline-primary px-4 d-flex d-grid flew-row gap-2" (click)="previousState()">
+          <i class="bi bi-x-lg"></i>
+          Cancel
+        </button>
+        <button style="font-size:0.8vw ;" type="submit" [disabled]="editForm.invalid || isSaving" class="btn btn-primary px-5 d-flex flex-row d-grid gap-2">
+          <i class="bi bi-check-lg"></i>
+          Add
+        </button>
+      </section>
+        </form>
+  </div>
+  </div>
+  

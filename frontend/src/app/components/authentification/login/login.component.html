@@ -1,0 +1,96 @@
+<div class="content">
+  <div id="insideContent">
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmitButtonClicked()">
+      <div class="position-relative mt-5">
+        <div class="position-absolute bottom-50 end-50">
+          <div class="d-flex justify-content-between ">
+            <!-- <div>
+                <p class="ml-5">Home</p>
+              </div>
+              <div>
+                Join
+              </div> -->
+          </div>
+        </div>
+        <div class="position-absolute bottom-0 start-0">
+          <span> <img src="../../../assets/img/logo-eprom.png" class="img-style"></span>
+        </div>
+        <!-- <div class="position-absolute bottom-0 end-0">
+          <strong>
+            <p id="toRegister" routerLink="/auth/register">Register</p>
+          </strong>
+        </div> -->
+      </div>
+      <div class="position-card">
+        <mat-card class="card1">
+          <div class="title">
+            <strong>
+              <p id="signIn">Sign In</p>
+            </strong>
+            <p id="msgCredential">Enter your credentials to acces your account</p>
+          </div>
+          <div class="row position-form position-relative">
+            <div class="col-md-11 mt-3">
+              <div class="form-group position-relative">
+
+
+                <input id="username" formControlName="username" type="text"
+                  [ngClass]="{'required': checkField($any(loginForm.get('username'))) }" class="form-control rounded"
+                  id="username" aria-describedby="emailHelp" placeholder="Sign in with your email or your phone number">
+                <div class="enveloppe"><i class="fa fa-envelope" aria-hidden="true"></i>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-11 mt-3">
+              <div class="form-group position-relative">
+                <input [type]="changetype?'password':'text'" class="form-control rounded" id="password"
+                  [ngClass]="{'required': checkField($any(loginForm.get('password'))) }" aria-describedby="passwordHelp"
+                  placeholder="Enter your password" formControlName="password">
+                <span class="eyeicon" (click)="viewpass()"><i
+                    [ngClass]="visible?'fa fa-eye':'fa fa-eye-slash'"></i></span>
+              </div>
+            </div>
+            <div class="col-md-11 mt-3">
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="gridCheck">
+                <label class="form-check-label" for="gridCheck">
+                  Remember me
+                </label>
+              </div>
+            </div>
+            <div class="col-md-12 col-sm-12 mt-3 d-flex justify-content-center align-content-center align-items-center">
+              <p id="errorMsg" class="alert alert-danger" role="alert" *ngIf="error">
+                <strong>There was an error!</strong><br>Please check your username/password and try again.
+              </p>
+              <button id="" class="btn btn-primary col-md-11" type="button"
+                [disabled]="!loginForm.valid || processing" (click)="onSubmitButtonClicked()">
+                {{ processing ? 'Validating...' : 'Sign in' }}
+              </button>
+            </div>
+            <div class="log">
+              <p id="account">Don't have an account ?</p>
+              <p id="getAccount">Send a demand to get an account
+                .Register</p>
+              <strong><span>
+                  <p id="forgotPassword"><a href="#">Forgot password ?</a></p>
+                </span> </strong>
+            </div>
+            <div class="col-md-10 ">
+              <div class="section-divider">
+                <span>or continue with</span>
+              </div>
+              <div class="template-demo">
+                <button type="button" class="btn btn-social-icon btn-instagram btn-rounded"><i
+                    class="fa fa-google"></i></button>
+                <button type="button" class="btn btn-social-icon btn-linkedin btn-rounded"><i
+                    class="fa fa-apple"></i></button>
+                <button type="button" class="btn btn-social-icon btn-dribbble btn-rounded"><i
+                    class="fa fa-qrcode"></i></button>
+              </div>
+            </div>
+          </div>
+        </mat-card>
+      </div>
+    </form>
+  </div>
+</div>

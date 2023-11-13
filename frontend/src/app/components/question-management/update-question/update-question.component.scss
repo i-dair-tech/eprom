@@ -1,0 +1,158 @@
+.global-container {
+  position: absolute;
+  top: 0;
+  right: 2;
+  bottom: 5;
+  left: 3;
+  margin-top: 10vh !important;
+}
+
+.card-Question {
+  background-color: #fff;
+  border: 1px solid rgba(217, 217, 217, 0.5);
+  box-shadow: 0px 4px 4px rgba(255, 255, 255, 0.25);
+  border-radius: 8px;
+}
+
+.icon-color {
+  color: #377DFF;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="date"],
+input[type="number"],
+textarea {
+  padding: 10px;
+  width: 100%;
+  border: 1px solid #d8d8d8;
+  border-radius: 5px;
+}
+
+h2 {
+  text-shadow: 1px 2px 3px rgb(12, 12, 14);
+}
+
+.text-format {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+  color: #707070;
+}
+
+@mixin cross($size: 2px, $color: currentColor, $thickness: 1px) {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: none;
+  position: relative;
+  width: $size;
+  height: $size;
+
+  &:before,
+  &:after {
+    content: '';
+    position: absolute;
+    top: ($size - $thickness) / 2;
+    left: 0;
+    right: 0;
+    height: $thickness;
+    background: $color;
+    border-radius: $thickness;
+  }
+
+  &:before {
+    transform: rotate(45deg);
+  }
+
+  &:after {
+    transform: rotate(-45deg);
+  }
+
+  span {
+    display: block;
+  }
+
+}
+
+
+
+// Example 1.
+.btn-close {
+  margin: 0;
+  border: 0;
+  padding: 0;
+  background: hsl(216, 100, 50);
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: all 150ms;
+
+  .icon-cross {
+    @include cross(20px, #fff, 6px);
+  }
+
+  &:hover,
+  &:focus {
+    transform: rotateZ(90deg);
+    background: hsl(216, 100, 40);
+  }
+
+}
+
+
+// For screen readers.
+.visually-hidden {
+  position: absolute !important;
+  clip: rect(1px, 1px, 1px, 1px);
+  padding: 0 !important;
+  border: 0 !important;
+  height: 1px !important;
+  width: 1px !important;
+  overflow: hidden;
+}
+
+
+div.t {
+  display: table-cell;
+  width: 100%;
+}
+
+div.t>input {
+  width: 100%;
+}
+
+
+#outer {
+  width: 100%;
+  text-align: center;
+}
+
+.inner {
+  display: inline-block;
+  width: 200px;
+}
+
+
+.close-icon {
+
+  top: 0;
+  left: 199px;
+  width: 20px;
+  height: 20px;
+}
+
+.icon-delete {
+  color: hsl(216, 100, 50);
+  font-size: 1.3em;
+  right: 0;
+}
+
+.btn- {
+  gap: 1rem;
+}

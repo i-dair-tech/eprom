@@ -1,0 +1,44 @@
+<div class="global-container container-fluid col-md-12">
+  <div class="container-profile col-md-12 container-fluid card-Question my-4 py-3">
+    <h4>
+      <i class="bi bi-clipboard2 mx-1"></i>
+      Survey:
+      <b class="mx-1">{{survey.title}}</b>
+    </h4>
+    <h1 class="text-center"><b>Terms and Conditions</b></h1>
+    <div class="legal__terms">
+      <div class="legal__terms-scroll">
+        <div id="terms-and-conditions">
+          <p>
+            We are looking for general medical information. If at any point you
+            do not want to answer a question, feel free to ignore it. Click the button
+            below to start the suvey, and thank you for your participation.<br>
+            ⁣⁢By clicking checkbox' below, I agree to use of my details to contact me about my specific request or
+            inquiry.⁫<br>
+            Visit the Privacy Notice for information on how we use your information.
+            You can unsubscribe anytime using a link at the bottom of our communications.
+          </p>
+        </div>
+
+      </div>
+    </div>
+    <label class="toggle__agree my-4">
+      <input type="checkbox" class="checkbox" (change)="changeEvent($event)" />
+      <span class="control-indicator"></span>
+      <span class="toggle__button">
+        Please agree to our
+        <a class="condition-link">terms and conditions</a>
+        and
+        <a class="condition-link">privacy policy</a>
+        to continue.
+        <sup>1</sup>
+      </span>
+    </label>
+    <div class="d-flex justify-content-center align-items-center">
+      <button [disabled]="!checked" (click)="goAhead(survey)" class="my-3 btn btn-primary col-md-2 shadow rounded">
+        Go Ahead
+        <i class="bi bi-arrow-right"></i>
+      </button>
+    </div>
+  </div>
+</div>

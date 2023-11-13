@@ -1,0 +1,82 @@
+<div class="global-container container-fluid">
+  <section class="page-content ">
+    <!-- <h4 class=""><b>Type of Question</b></h4> -->
+    <div class="container-fluid card-Question my-4 py-3">
+      <form class="task-form form-row stop-form" #form="ngForm" autocomplete="off" (submit)="onSubmit(form)">
+        <input type="hidden" name="id" [value]="questionsTypeService.formData.id" />
+        <label class="qst-config mb-2">
+          <div class="d-flex align-content-center align-items-center">
+            <img class="add-icon" src="../../../../assets/icons/icon-plus.png"> &nbsp;&nbsp;
+            <h4 class="my-2"><b>Add new type</b></h4>
+          </div>
+        </label>
+        <section class="d-flex justify-content-center">
+          <div class="col-md-6 row my-4">
+            <label for="">Question type</label>
+            <input class="form-control" type="text" id="stop-name" name="text" #text="ngModel"
+              [(ngModel)]="questionsTypeService.formData.text" required oninput="this.value=this.value.toUpperCase()" />
+            <div *ngIf="text.invalid && (text.dirty || text.touched)" class="alert alert-danger mt-2">
+              Please select a valid question type
+            </div>
+          </div>
+
+        </section>
+        <div class="col-sm-12 d-flex justify-content-end justify-content-center flex-row flex-wrap my-1 btn-">
+          <button style="font-size:0.8vw ;" id="cancel" name="cancel"
+            class="btn btn-outline-primary d-flex d-grid flew-row gap-2" value="1">
+            <i class="bi bi-clipboard-x"></i>
+            Cancel
+          </button>
+          <button style="font-size:0.8vw ;" type="submit" class="btn btn-primary  d-flex flex-row d-grid gap-2"
+            [disabled]="text.invalid">
+            <i class="bi bi-clipboard-plus"></i>
+            Add type
+          </button>
+        </div>
+      </form>
+    </div>
+    <div class="container-fluid card-Question py-4 mt-3 position-relative overflow-auto">
+      <label class="qst-config mb-2">
+        <div class="d-flex align-content-center align-items-center">
+          <img class="add-icon" src="../../../assets/icons/icon-title.png"> &nbsp;&nbsp;
+          <h4 class="my-2"><b>Question Configuration</b></h4>
+        </div>
+      </label>
+      <div class="col-md-4 my-2">
+        <input class="form-control search form-control" type="text" name="search" placeholder="search question type">
+      </div>
+      <div class="tabel-cont">
+        <table class="table table-striped table-hover overflow-scroll">
+          <thead class="thead-dark">
+            <tr>
+              <th scope="col">Type</th>
+              <th scope="col">Creator</th>
+              <th scope="col">Date created</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let qt of questionsTypes">
+              <td>{{qt.text}}</td>
+              <td>{{qt.createdBy}}</td>
+              <td>{{qt.createdDate?.toString()?.slice(0,10)}}</td>
+              <td>
+                <a class="btn update-icon d-flex flex-row d-grid gap-2 fs-6 justify-content-center align-content-center align-items-center"
+                  (click)="populateForm(qt)">
+                  <i class="bi bi-pencil-square icon-size"></i>
+                  <span class="icon- fw-light">Edit</span>
+                </a>
+              </td>
+              <td>
+                <a (click)="onDelete(qt)"
+                  class="btn delete-icon d-flex flex-row d-grid gap-2 justify-content-center align-content-center align-items-center">
+                  <i class="fa fa-trash icon-size"></i>
+                  <span class="icon- fw-light">Delete</span>
+                </a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+</div>

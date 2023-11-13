@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mappings xmlns="http://dozer.sourceforge.net"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://dozer.sourceforge.net
+          http://dozer.sourceforge.net/schema/beanmapping.xsd">
+	<configuration>
+		<stop-on-errors>false</stop-on-errors>
+		<wildcard>true</wildcard>
+        <copy-by-references>
+            <copy-by-reference>java.time.*</copy-by-reference>
+        </copy-by-references>
+	</configuration>
+	<mapping>
+		<class-a>com.dqlick.eprom.domain.Answer</class-a>
+		<class-b>com.dqlick.eprom.service.dto.AnswerDTO</class-b>
+	</mapping>
+	<mapping stop-on-errors="false">
+		<class-a>com.dqlick.eprom.domain.Question</class-a>
+		<class-b>com.dqlick.eprom.service.dto.QuestionDTO</class-b>
+	</mapping>
+
+	<mapping stop-on-errors="false">
+		<class-a>com.dqlick.eprom.domain.AnswerChoice</class-a>
+		<class-b>com.dqlick.eprom.service.dto.AnswerChoiceDTO</class-b>
+	</mapping>
+
+	<mapping stop-on-errors="false">
+		<class-a>com.dqlick.eprom.domain.Survey</class-a>
+		<class-b>com.dqlick.eprom.service.dto.SurveyDTO</class-b>
+	</mapping>
+
+	<mapping stop-on-errors="false">
+		<class-a>com.dqlick.eprom.domain.TypeQuestion</class-a>
+		<class-b>com.dqlick.eprom.service.dto.TypeQuestionDTO</class-b>
+	</mapping>
+
+</mappings>
