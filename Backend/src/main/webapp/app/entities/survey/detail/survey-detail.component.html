@@ -1,0 +1,86 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="survey">
+      <h2 data-cy="surveyDetailsHeading"><span>Survey</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span>ID</span></dt>
+        <dd>
+          <span>{{ survey.id }}</span>
+        </dd>
+        <dt><span>Name</span></dt>
+        <dd>
+          <span>{{ survey.name }}</span>
+        </dd>
+        <dt><span>Type</span></dt>
+        <dd>
+          <span>{{ survey.type }}</span>
+        </dd>
+        <dt><span>Description</span></dt>
+        <dd>
+          <span>{{ survey.description }}</span>
+        </dd>
+        <dt><span>Question Order</span></dt>
+        <dd>
+          <span>{{ survey.questionOrder }}</span>
+        </dd>
+        <dt><span>Created By</span></dt>
+        <dd>
+          <span>{{ survey.createdBy }}</span>
+        </dd>
+        <dt><span>Created Date</span></dt>
+        <dd>
+          <span>{{ survey.createdDate | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span>Last Modified By</span></dt>
+        <dd>
+          <span>{{ survey.lastModifiedBy }}</span>
+        </dd>
+        <dt><span>Last Modified Date</span></dt>
+        <dd>
+          <span>{{ survey.lastModifiedDate | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span>Is Archived</span></dt>
+        <dd>
+          <span>{{ survey.isArchived }}</span>
+        </dd>
+        <dt><span>Archived Date</span></dt>
+        <dd>
+          <span>{{ survey.archivedDate | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span>Question</span></dt>
+        <dd>
+          <span *ngFor="let question of survey.questions; let last = last">
+            <a [routerLink]="['/question', question?.id, 'view']">{{
+              question.id
+            }}</a
+            >{{ last ? "" : ", " }}
+          </span>
+        </dd>
+      </dl>
+
+      <button
+        type="submit"
+        (click)="previousState()"
+        class="btn btn-info"
+        data-cy="entityDetailsBackButton"
+      >
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+      </button>
+
+      <button
+        type="button"
+        [routerLink]="['/survey', survey.id, 'edit']"
+        class="btn btn-primary"
+      >
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

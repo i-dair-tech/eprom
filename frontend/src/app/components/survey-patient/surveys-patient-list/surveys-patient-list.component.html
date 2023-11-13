@@ -1,0 +1,48 @@
+<div class="global-container col-md-10">
+    <div class="pt-2 container-fluid" *ngFor="let survey of surveys"
+        [ngStyle]="{'box-shadow': survey.status == 'SENT'  ? 'green' : 'red' }">
+        <div class="course d-flex">
+            <div
+                class="course-preview col-md-2 px-3 pt-3 d-flex flex-column align-content-center justify-content-center">
+                <h6>Survey Topic</h6>
+                <h2>{{survey.topic}}</h2>
+            </div>
+            <div class="w-100 mx-4 justify-content-center d-flex flex-wrap flex-column">
+                <div class="d-flex justify-content-end">
+                    <div class="progress-container mt-2">
+                        <div class="progress"></div>
+                        <span class="progress-text">
+                            {{survey.questions?.length}} Questions
+                        </span>
+                    </div>
+                </div>
+
+                <div class="d-flex flex-row justify-content-between col-md-12 flex-wrap mt-4">
+                    <div class="d-flex flex-column justify-content-center align-content-center">
+                        <h6 *ngIf="survey.status=='SENT'">Survey Title &nbsp; <span [ngStyle]="{'color':'green'}"> <b>TO
+                                    ANSWER</b></span></h6>
+
+                        <h6 *ngIf="survey.status !='SENT' && survey.status=='RESPONDED'">Survey Title &nbsp; <span
+                                [ngStyle]="{'color':'red' }"> <b> LOCKED ( ALREADY RESPONDED )</b></span></h6>
+
+                        <h6 *ngIf="survey.status!='SENT' && survey.status=='NOT_ANSWERED'">Survey Title &nbsp; <span
+                                [ngStyle]="{'color': 'red' }"> <b> LOCKED ( Time's up! ) </b></span></h6>
+
+                        <h2>{{survey.title}}</h2>
+                        <div class="d-flex d-grid gap-2 justify-content-center align-content-center align-items-center">
+                            <h6 class="text-muted"><i class="bi bi-person"></i> &nbsp;Send by :&nbsp;<b>{{survey.createdBy}}</b></h6>
+                            <div class="vr mb-2"></div>
+                            <h6 class="text-muted"><i class="bi bi-stopwatch"></i> &nbsp; Sending date:&nbsp;<b>{{survey.createdDate?.toString()?.slice(0,10)}}</b></h6>
+                        </div>
+                    </div>
+                    <div class="d-flex align-items-center">
+                        <button class="btn" (click)="choice(survey)" [disabled]="survey.status !=='SENT' ">
+                            <i class="bi bi-check2-circle"></i>
+                            Pass Survey
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

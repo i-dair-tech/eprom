@@ -1,0 +1,73 @@
+@import url('https://fonts.googleapis.com/css?family=Muli&display=swap');
+
+* {
+	box-sizing: border-box;
+}
+
+.course {
+	background-color: #fff;
+	border-radius: 10px;
+	box-shadow: 0 10px 10px rgba(0, 0, 0, 0.2);
+	// margin-left: 7vw !important;
+}
+
+.course h6 {
+	opacity: 0.6;
+	text-transform: uppercase;
+	font-size: 0.8vw;
+	line-height: 1vw;
+}
+
+.course h2 {
+	font-size: 0.9vw;
+	line-height: 2vw;
+}
+
+.course-preview {
+	background-color: #2A265F;
+	border-radius: 10px 0px 0px 10px;
+	color: #fff;
+}
+
+.progress-container {
+	position: absolute;
+	// right: 3vw;
+	text-align: right;
+	width: 15vw;
+}
+
+.progress {
+	background-color: #ddd;
+	border-radius: 3px;
+	height: 4px;
+	width: 100%;
+}
+
+.progress::after {
+	border-radius: 3px;
+	background-color: #0E75BB;
+	content: '';
+	position: absolute;
+	top: 0;
+	left: 0;
+	height: 4px;
+	width: 66%;
+}
+
+.progress-text {
+	font-size: 0.8vw;
+	opacity: 0.6;
+}
+
+.btn {
+	background-color: #2A265F;
+	box-shadow: 0 10px 10px rgba(0, 0, 0, 0.2);
+	color: #fff;
+	font-size: 0.8vw;
+}
+
+.global-container{
+	position:absolute;
+	margin-left: 9vw;
+	margin-right: 9vw;
+}

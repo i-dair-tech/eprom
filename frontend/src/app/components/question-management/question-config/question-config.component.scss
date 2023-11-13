@@ -1,0 +1,184 @@
+.global-container {
+  position: absolute;
+  top: 0;
+  right: 2;
+  bottom: 5;
+  left: 3;
+  margin-top: 8vh !important;
+}
+
+.card-Question {
+  background-color: #fff;
+  border: 1px solid rgba(217, 217, 217, 0.5);
+  box-shadow: 0px 4px 4px rgba(255, 255, 255, 0.25);
+  border-radius: 8px;
+}
+.add-icon{
+  max-width: 1.6vw; 
+  max-height: 1.6vw;
+}
+.title-card-type {
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 16px;
+  color: #081A51;
+}
+
+form section div input {
+  width: 100%;
+  padding: 12px 10px;
+  font-size: 10px;
+  color: #1F1F20;
+  letter-spacing: 1px;
+  outline: none;
+  background: transparent;
+  border: 1px solid rgba(58, 53, 65, 0.23);
+}
+
+form section div {
+  position: relative;
+}
+
+@keyframes LabelOnLoad {
+  0% {
+    transform: rotate(0) translateY(-19px);
+    opacity: 0;
+  }
+
+  100% {
+    transform: rotate(0) translateY(0);
+    opacity: 1;
+  }
+}
+
+form section .select-type select {
+  width: 100%;
+  padding: 12px 10px;
+  font-size: 10px;
+  color: #1F1F20;
+  letter-spacing: 1px;
+  outline: none;
+  background: transparent;
+  border: 1px solid rgba(58, 53, 65, 0.23);
+}
+
+form section .select-type label {
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding: 15px 20px;
+  font-size: 12px;
+  color: rgba(58, 53, 65, 0.68);
+  pointer-events: none;
+  transition: .5s;
+  animation: LabelOnLoad 1s forwards 0s ease;
+}
+
+form section .select-type {
+  position: relative;
+}
+
+@keyframes LabelOnLoad {
+  0% {
+    transform: rotate(0) translateY(-19px);
+    opacity: 0;
+  }
+
+  100% {
+    transform: rotate(0) translateY(0);
+    opacity: 1;
+  }
+}
+
+form section .select-type select:focus~label,
+form section .select-type select:valid~label {
+  top: -15px;
+  left: 0;
+  color: #03A9F4;
+  font-size: 10px;
+}
+
+.qst-config {
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 23px;
+  color: #081A51;
+}
+
+.margin-icon {
+  margin-right: 2vh;
+}
+
+.row-search {
+  display: flex;
+  flex-direction: row;
+}
+
+.icon-search {
+  z-index: 1;
+  height: auto;
+  margin-right: -10px;
+}
+
+.delete-icon:hover{
+  background-color: #D50000  ;
+  color: #fff  ;
+}
+
+.update-icon:hover{
+  background-color: #1565C0;
+  color: #fff;
+}
+.cancel-btn:hover{
+  background-color: #D50000;
+  border: none;
+  cursor: pointer;
+}
+.add-btn{
+  background-color:#0E75BB ;
+  color: #fff;
+}
+.add-btn:hover{
+  cursor: pointer;
+  background-color: #1565C0;
+  border: none;
+}
+table th {
+  font-size: 0.9vw;
+}
+table tbody{
+  font-size: 0.8vw;
+}
+.pagination-{
+  font-size: 0.6vw;
+}
+div input{
+  font-size: 0.8vw;
+}
+
+.icon-{
+  font-size: 0.6vw !important;
+}
+
+form section div input{
+  font-size: 0.6vw;
+}
+form section div label{
+  font-size: 0.6vw;
+}
+.btn-{
+  gap: 1rem;
+}
+@media only screen and (max-width: 600px) {
+  table{
+    overflow: scroll;
+  }
+} 
+@media only screen and (max-width: 768px) {
+  
+} 
+@media only screen and (max-width: 992px) {
+  .icon-size{
+    font-size: 1.5vw;
+  }
+} 

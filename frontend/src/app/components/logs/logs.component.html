@@ -1,0 +1,43 @@
+<div class="global-container container-fluid col-md-12">
+  <div class="container-fluid card-Question my-4 py-3 overflow-auto">
+    <div class="d-flex align-content-center align-items-center">
+      <img class="add-icon" src="../../../assets/icons/icon-title.png"> &nbsp;&nbsp;
+      <h4 class="my-2"><b>Logs</b></h4>
+    </div>
+    <span class="counter pull-right"></span>
+    <div class="col-md-4 my-2">
+      <input type="text" class="search form-control" placeholder="search" name="search">
+    </div>
+    <table class="table results sortable overflow-hidden">
+      <thead>
+        <tr>
+          <th scope="col">Action</th>
+          <th scope="col">Entity</th>
+          <th scope="col">Operation</th>
+          <th scope="col">RemoteIp</th>
+          <th scope="col">Description</th>
+          <th scope="col">Creator</th>
+          <th scope="col">Date created</th>
+        </tr>
+        <tr class="warning no-result" *ngIf="!logs">
+          <td colspan="4"><i class="fa fa-exclamation-triangle"></i> No Result</td>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let log of logs | paginate: { itemsPerPage: 10,currentPage: q }">
+          <td>{{log.action}}</td>
+          <td>{{log.entity}}</td>
+          <td>{{log.operation}}</td>
+          <td>{{log.remoteIp}}</td>
+          <td>{{log.description}}</td>
+          <td>{{log.createdBy}}</td>
+          <td>{{log.createdDate?.toString()?.slice(0,10)}}</td>
+        </tr>
+
+      </tbody>
+    </table>
+    <div class="d-flex justify-content-center pagination-">
+      <pagination-controls (pageChange)="q = $event"></pagination-controls>
+    </div>
+  </div>
+</div>

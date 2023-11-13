@@ -1,0 +1,73 @@
+{
+  "applications": "*",
+  "changelogDate": "20220604224522",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "question",
+  "fields": [
+    {
+      "fieldName": "text",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "createdBy",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "createdDate",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "lastModifiedBy",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "lastModifiedDate",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "isArchived",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "archivedDate",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "language",
+      "fieldType": "Language",
+      "fieldValidateRules": ["required"],
+      "fieldValues": "HINDI,ENGLISH,ARABIC"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "Question",
+  "pagination": "infinite-scroll",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityField": "id",
+      "otherEntityName": "answerChoice",
+      "otherEntityRelationshipName": "question",
+      "ownerSide": true,
+      "relationshipName": "answerChoice",
+      "relationshipType": "many-to-many"
+    },
+    {
+      "otherEntityName": "typeQuestion",
+      "otherEntityRelationshipName": "question",
+      "relationshipName": "typeQuestion",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "survey",
+      "otherEntityRelationshipName": "question",
+      "ownerSide": false,
+      "relationshipName": "survey",
+      "relationshipType": "many-to-many"
+    }
+  ],
+  "service": "serviceImpl"
+}

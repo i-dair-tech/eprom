@@ -1,0 +1,73 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="answer">
+      <h2 data-cy="answerDetailsHeading"><span>Answer</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span>ID</span></dt>
+        <dd>
+          <span>{{ answer.id }}</span>
+        </dd>
+        <dt><span>Text</span></dt>
+        <dd>
+          <span>{{ answer.text }}</span>
+        </dd>
+        <dt><span>Created By</span></dt>
+        <dd>
+          <span>{{ answer.createdBy }}</span>
+        </dd>
+        <dt><span>Created Date</span></dt>
+        <dd>
+          <span>{{ answer.createdDate | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span>Last Modified By</span></dt>
+        <dd>
+          <span>{{ answer.lastModifiedBy }}</span>
+        </dd>
+        <dt><span>Last Modified Date</span></dt>
+        <dd>
+          <span>{{ answer.lastModifiedDate | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span>Is Archived</span></dt>
+        <dd>
+          <span>{{ answer.isArchived }}</span>
+        </dd>
+        <dt><span>Archived Date</span></dt>
+        <dd>
+          <span>{{ answer.archivedDate | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span>Question</span></dt>
+        <dd>
+          <div *ngIf="answer.question">
+            <a [routerLink]="['/question', answer.question?.id, 'view']">{{
+              answer.question?.id
+            }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button
+        type="submit"
+        (click)="previousState()"
+        class="btn btn-info"
+        data-cy="entityDetailsBackButton"
+      >
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+      </button>
+
+      <button
+        type="button"
+        [routerLink]="['/answer', answer.id, 'edit']"
+        class="btn btn-primary"
+      >
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

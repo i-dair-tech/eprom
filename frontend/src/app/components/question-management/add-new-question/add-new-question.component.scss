@@ -1,0 +1,113 @@
+.global-container {
+  position: absolute;
+  top: 0;
+  right: 2;
+  bottom: 5;
+  left: 3;
+  margin-top: 8vh !important;
+}
+
+.add-icon{
+  max-width: 1.6vw; 
+  max-height: 1.6vw;
+}
+
+.card-Question {
+  background-color: #fff;
+  border: 1px solid rgba(217, 217, 217, 0.5);
+  box-shadow: 0px 4px 4px rgba(255, 255, 255, 0.25);
+  border-radius: 8px;
+}
+
+.text-format {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+  color: #707070;
+}
+
+.flex-container {
+  gap: 1rem;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="date"],
+input[type="number"],
+textarea {
+  padding: 10px;
+  width: 100%;
+  border: 1px solid #d8d8d8;
+  border-radius: 5px;
+}
+
+@mixin cross($size: 2px, $color: currentColor, $thickness: 1px) {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: none;
+  position: relative;
+  width: $size;
+  height: $size;
+
+  &:before,
+  &:after {
+    content: '';
+    position: absolute;
+    top: ($size - $thickness) / 2;
+    left: 0;
+    right: 0;
+    height: $thickness;
+    background: $color;
+    border-radius: $thickness;
+  }
+
+  &:before {
+    transform: rotate(45deg);
+  }
+
+  &:after {
+    transform: rotate(-45deg);
+  }
+
+  span {
+    display: block;
+  }
+}
+
+.icon-color {
+  color: #377DFF;
+}
+
+div.t {
+  display: table-cell;
+  width: 100%;
+}
+
+div.t>input {
+  width: 100%;
+}
+
+.outer {
+  width: 100%;
+  text-align: center;
+}
+
+.inner {
+  display: inline-block;
+  width: 200px;
+}
+
+.icon-delete {
+  color: hsl(216, 100, 50);
+  font-size: 1.3em;
+  right: 0;
+}
+.icon-delete:hover {
+  color: #fff;
+  background-color: #377DFF;
+  top:2px
+}
+.btn-{
+  gap: 1rem;
+}

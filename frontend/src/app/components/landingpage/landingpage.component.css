@@ -1,0 +1,216 @@
+::-webkit-scrollbar {
+  display: none;
+}
+
+.container-home {
+  top: 0 !important;
+  position: absolute;
+}
+
+#wrapper {
+  height: 10vh;
+}
+
+#wrapper #PlacesNav {
+  position: fixed;
+  z-index: 2;
+  top: 8vw;
+  width: 50vw;
+  display: flex;
+  align-items: center;
+  margin-left: 25vw;
+  pointer-events: none;
+}
+
+#wrapper #PlacesNav span {
+  pointer-events: all;
+  display: flex;
+  justify-content: space-between;
+  width: 40vw;
+  -webkit-backdrop-filter: blur(31px);
+  backdrop-filter: blur(31px);
+  border-radius: 733.41px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.13);
+}
+
+#wrapper #PlacesNav span a {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 3vw;
+  width: 15vw;
+  color: #fff;
+  font-size: 1.1vw;
+  font-weight: 400;
+  text-decoration: none;
+  text-transform: uppercase;
+  border-radius: 733.41px;
+  transition: all 0.5s;
+}
+
+#wrapper #PlacesNav span a:hover {
+  background: rgb(255, 255, 255);
+  color: rgb(0, 0, 0);
+  text-shadow: none;
+}
+
+#wrapper #PlacesNav span a:nth-child(1) {
+  text-align: left;
+}
+
+#wrapper #PlacesNav span a:nth-child(3) {
+  text-align: right;
+}
+
+#wrapper .slidee {
+  position: relative;
+  z-index: -1;
+  flex-shrink: 0;
+  width: 100%;
+  height: 70vh;
+}
+
+#wrapper #slide1 {
+  background: url('../../../assets/img/epromImage.png') center fixed;
+  background-size: cover;
+  height: 50vw;
+}
+
+#wrapper #slide2 {
+  background: url('../../../assets/img/idairImage.png') center fixed;
+  background-size: cover;
+  height: 50vw;
+}
+
+#wrapper #slide3 {
+  background: url('../../../assets/img/contactUsImage.png') center fixed;
+  background-size: cover;
+  height: 50vw;
+}
+
+#wrapper #footer {
+  background: url('../../../assets/img/footer.png') center fixed;
+  background-size: cover;
+  height: 40vw;
+}
+
+#wrapper .slidee .main-slide {
+  padding-top: 15vw;
+  margin-left: 4vw;
+}
+
+#wrapper .slidee .main-slide-form {
+  padding-top: 5vw;
+  margin-left: 4vw;
+}
+
+#wrapper .slidee .main-slide-footer {
+  margin-left: 4vw;
+  margin-right: 4vw;
+}
+
+#wrapper .slidee h1 {
+  font-size: 1.5vw;
+  font-weight: 700;
+  color: rgb(255, 255, 255);
+}
+
+#wrapper .slidee article {
+  font-size: 1.1vw;
+  font-weight: 400;
+  color: rgb(255, 255, 255);
+  line-height: 2vw;
+}
+
+#wrapper .slidee article form {
+  z-index: 1;
+  cursor: pointer;
+}
+
+#wrapper .slidee article {
+  color: #fff;
+}
+
+#wrapper .slidee article section .support .img-support {
+  min-width: 3vw !important;
+  max-height: 3vw !important;
+}
+
+#wrapper .slidee article section .copyright-mimi {
+  font-size: clamp(7px, 5vw, 10px);
+  color: #fff;
+}
+
+#wrapper .slidee article section .copyright-mimi a {
+  text-decoration: none;
+  color: #fff;
+  font-weight: bold;
+}
+
+#wrapper .slidee article section .copyright-mimi a:hover {
+  color: #0E75BB;
+  font-size: 12px;
+}
+
+#wrapper .slidee article img {
+  max-width: 11vw !important;
+  max-height: 5vw !important;
+}
+
+@media screen and (max-width: 576px) {
+  #wrapper #footer {
+    height: 130vw;
+  }
+
+  #wrapper .slidee h1 {
+    font-size: 0.8rem;
+  }
+
+  #wrapper .slidee article form {
+    width: 70vw;
+    margin-top: 10vw
+  }
+
+  #wrapper .slidee article form input,
+  textarea,
+  button {
+    font-size: 2vw;
+  }
+
+  #wrapper #slide1{
+    height:fit-content !important;
+    padding-bottom: 10% !important;
+  }
+
+  #wrapper #slide3 {
+    height: 60vh !important;
+  }
+
+  #wrapper #slide1 , #slide3 {
+    background: #04183C !important;
+  }
+
+  #wrapper #slide2{
+    background: #072451 !important;
+  }
+
+  #wrapper .slidee article {
+    font-size: 0.8rem;
+    line-height: 1rem;
+    padding-right: 10% !important;
+    text-align: justify !important;
+    color: #fff !important;
+  }
+  #wrapper #PlacesNav span {
+    width: 60vw;
+  }
+  #wrapper #PlacesNav span a {
+    font-size: 0.5rem;
+    width: 100%;
+  }
+
+}
+
+@media screen and (max-width: 768px) {}
+
+@media screen and (min-width: 992px) {}

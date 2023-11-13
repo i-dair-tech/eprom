@@ -1,0 +1,113 @@
+<div class="global-container container-fluid col-md-12">
+  <div class="d-flex flex-row flex-wrap d-grid gap-3">
+    <div class="container col-md-2">
+      <i class="icon-- bi bi-book-half"></i>
+      <span class="num" data-val="225">{{number_studies}}</span>
+      <span class="text">Number of Studies</span>
+    </div>
+  </div>
+
+  <div class="my-5 d-flex flex-column container-fluid justify-content-center align-items-center">
+    <section class="my-5 d-flex flex-row col-md-9 justify-content-between align-items-center flex-wrap">
+      <!-- email -->
+      <div class="col-md-4 d-flex align-content-center flex-column">
+        <label class="d-flex flex-row py-1 d-grid gap-2 align-baseline align-items-center">
+          <i class="icon-- bi bi-envelope-at"></i>
+          Search By Study Name:
+        </label>
+        <input class="form-control inner form-control-sm" type="text" [(ngModel)]="searchTerm"
+          placeholder="Search by Title" />
+      </div>
+      <!-- list -->
+      <div class="col-md-4 ">
+        <label class="d-flex flex-row py-1 d-grid gap-2 align-baseline align-items-center">
+          <i class="icon-- bi bi-list-nested"></i>
+          List of Studies
+        </label>
+        <select [(ngModel)]="selectedStudy" class="form-select form-select-sm">
+          <option *ngFor="let study of filteredStudies" value={{study.id}}>
+            {{ study.title }}
+          </option>
+        </select>
+      </div>
+      <!-- btn -->
+      <div class="d-flex flex-column justify-content-center align-items-center">
+        <label class="text--">
+          !
+        </label>
+        <button [disabled]="!selectedStudy" (click)="onSelectStudy()" type="submit"
+          class="btn btn-primary d-flex d-grid gap-2">
+          <i class="bi bi-check-lg"></i>
+          Show Details
+        </button>
+      </div>
+    </section>
+
+
+    <section *ngIf="show" class="container-fluid d-flex justify-content-between align-content-center col-md-9">
+      <div class="d-flex flex-column col-md-5">
+        <h2>This Study contain <b class="blue-title">{{ surveyNumber}}</b> surveys</h2>
+
+        <div class="box mat-dialog-container- ">
+          <div *ngFor="let owner of owners">
+
+            <div class="bg-patient">
+              <label class="d-flex">
+                <i class="bi bi-person"></i>&nbsp;
+                Patient :
+              </label>
+              <h4 class="container-fluid">{{ owner }}</h4>
+            </div>
+
+            <div *ngFor="let survey of surveys[owner]">
+              <div>
+                <label class="d-flex">
+                  <i class="bi bi-card-checklist"></i>&nbsp;
+                  Survey name :
+                </label>
+                <h5 class="container-fluid">{{ survey }}</h5>
+              </div>
+
+              <div *ngFor="let score of scores[owner][survey]">
+                <h5 class="d-flex justify-content-between">
+                  <span>
+                    <i class="bi bi-calendar"></i>
+                    {{ score.timestamp | date:'mediumDate' }}
+                  </span>
+
+                  <span data-bs-toggle="tooltip" data-bs-placement="left" title="Tooltip on left">
+                    <i class="bi bi-bar-chart"></i>&nbsp;
+                    {{ score.value }}
+                  </span>
+                </h5>
+              </div>
+              <hr>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="d-flex flex-column col-md-4">
+        <div class="d-flex flex-row justify-content-center align-content-center align-items-stretch">
+          <i style="color:#081A51" class="bi bi-collection-fill"></i>&nbsp;
+          <h4><b>Number of invites included in the survey</b></h4>
+        </div>
+
+        <div class="d-flex flex-column box box-details mat-dialog-container- ">
+          <div *ngFor="let item of invitations | keyvalue" class="d-flex flex-column">
+            <label class="d-flex">
+              <i class="bi bi-card-checklist"></i>&nbsp;
+              {{ item.key }}
+            </label>
+            <div class="d-flex flex-row">
+              <b>{{ item.value }}</b>&nbsp; <h5>Invitations sent</h5>
+            </div>
+            <hr>
+          </div>
+        </div>
+      </div>
+
+    </section>
+  </div>
+
+</div>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- FontAwesome Icons -->
+    <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+  </head>
+
+    <div class="wrapper global-container container-fluid col-md-12">
+      <div class="container">
+        <i class="bx bx-list-check"></i>
+        <span class="num" data-val="340">{{number_surveys}}</span>
+        <span class="text">Number of Surveys</span>
+      </div>
+
+      <div class="container">
+        <i class=" bx bx-notepad"></i>
+        <span class="num" data-val="400">{{number_answer}}</span>
+        <span class="text px-2 text-wrap"> Number of Survey Answered</span>
+      </div>
+
+      <div class="container">
+        <i class="bx bx-question-mark"></i>
+        <span class="num" data-val="400">{{number_question}}</span>
+        <span class="text"> Number of Questions</span>
+      </div>
+    </div>
+    <div class="wrapper_two">
+      <section class="d-flex justify-content-center align-content-center col-md-12">
+        <div echarts [options]="option" class="chart-perSurvey"></div>
+      </section>
+
+     </div>
+  
+</html>

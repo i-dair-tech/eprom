@@ -1,0 +1,67 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="typeQuestion">
+      <h2 data-cy="typeQuestionDetailsHeading"><span>Type Question</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span>ID</span></dt>
+        <dd>
+          <span>{{ typeQuestion.id }}</span>
+        </dd>
+        <dt><span>Text</span></dt>
+        <dd>
+          <span>{{ typeQuestion.text }}</span>
+        </dd>
+        <dt><span>Created By</span></dt>
+        <dd>
+          <span>{{ typeQuestion.createdBy }}</span>
+        </dd>
+        <dt><span>Created Date</span></dt>
+        <dd>
+          <span>{{ typeQuestion.createdDate | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span>Last Modified By</span></dt>
+        <dd>
+          <span>{{ typeQuestion.lastModifiedBy }}</span>
+        </dd>
+        <dt><span>Last Modified Date</span></dt>
+        <dd>
+          <span>{{
+            typeQuestion.lastModifiedDate | formatMediumDatetime
+          }}</span>
+        </dd>
+        <dt><span>Is Archived</span></dt>
+        <dd>
+          <span>{{ typeQuestion.isArchived }}</span>
+        </dd>
+        <dt><span>Archived Date</span></dt>
+        <dd>
+          <span>{{ typeQuestion.archivedDate | formatMediumDatetime }}</span>
+        </dd>
+      </dl>
+
+      <button
+        type="submit"
+        (click)="previousState()"
+        class="btn btn-info"
+        data-cy="entityDetailsBackButton"
+      >
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+      </button>
+
+      <button
+        type="button"
+        [routerLink]="['/type-question', typeQuestion.id, 'edit']"
+        class="btn btn-primary"
+      >
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

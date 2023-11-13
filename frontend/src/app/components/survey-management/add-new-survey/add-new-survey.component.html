@@ -1,0 +1,86 @@
+<div class="global-container container-fluid col-md-12">
+  <div class="container-fluid card-Question my-4 py-3 overflow-auto">
+    <section class="d-flex align-content-center align-items-center">
+      <img class="add-icon" src="../../../../assets/icons/icon-plus.png">&nbsp;&nbsp;
+      <h4 class="my-2"><b> ADD SURVEY </b></h4>
+    </section>
+
+    <div class="progress">
+      <div class="progress-bar" [style.width]="barwidth + '%'"></div>
+    </div>
+
+    <form #form="ngForm" autocomplete="off">
+      <section class="col-sm-12">
+        <div *ngIf="!show" id="1" class="form-group col-sm-7">
+
+          <div class="container-fluid my-4">
+            <label style="font-size:0.8vw ;" for="title">Survey Title:</label>
+            <input style="font-size:0.8vw ;" type="text" class="form-control" name="title" id="title" #title="ngModel"
+              [(ngModel)]="survey.title" oninput="this.value=this.value.toUpperCase()">
+          </div>
+
+          <div class="container-fluid my-4">
+            <label style="font-size:0.8vw ;" for="topic">Survey Topic:</label>
+            <input style="font-size:0.8vw ;" type="text" class="form-control" name="topic" id="topic" #topic="ngModel"
+              [(ngModel)]="survey.topic" oninput="this.value=this.value.toUpperCase()">
+          </div>
+
+          <div class="container-fluid my-4">
+            <label style="font-size:0.8vw ;" for="description">Survey Description:</label>
+            <textarea style="font-size:0.8vw ;" type="text" class="form-control" name="description" id="description"
+              #description="ngModel" [(ngModel)]="survey.description"> </textarea>
+          </div>
+        </div>
+
+        <div *ngIf="show" id="2" class="form-group col-md-12">
+          <div class="row container-fluid my-4">
+            <ngx-datatable tableClass="table table-striped table-bordered table-hover" [tableId]="'checkbox'"
+              [data]="rows" [options]="options" limit="5" [columns]="columns" (checkboxClick)="onCheckboxClick($event)">
+              <ngx-caption>
+                <div class="row header-tab">
+                  <div class="col-sm-12 col-xs-12 col-md-12">
+                    <b>
+                      <i class="bi bi-card-list"></i>
+                      Questions List
+                    </b>
+                  </div>
+                </div>
+              </ngx-caption>
+            </ngx-datatable>
+          </div>
+        </div>
+
+        <div *ngIf="show" id="2" class="form-group">
+          <div class="row container-fluid my-4" *ngIf="chkBoxSelected.length !==0">
+            <div cdkDropList #todoList="cdkDropList" [cdkDropListData]="chkBoxSelected" class="example-list"
+              (cdkDropListDropped)="drop($event)">
+              <div class="example-box mt-2 col-md-12" *ngFor="let item of chkBoxSelected" cdkDrag>{{item.text}} <i
+                  class="bi bi-trash-fill" (click)="remove(item)"></i></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="d-flex flex-row flex-wrap my-5 justify-content-end btn-">
+
+        <button style="font-size:0.8vw ;" type="submit" (click)="previous()" [disabled]="!pervshow"
+          class="d-flex d-grid gap-2 btn btn-primary px-4">
+          <a href="#1"></a>
+          <i class="bi bi-arrow-bar-left"></i>
+          Previous
+        </button>&nbsp;
+        <button style="font-size:0.8vw ;" type="submit" (click)="next()" [disabled]="!nextshow"
+          class="d-flex d-grid gap-2 btn btn-primary px-5">
+          <a href="#2"></a>
+          Next
+          <i class="bi bi-arrow-bar-right"></i>
+        </button>
+        <button style="font-size:0.8vw ;" type="submit" *ngIf="saveshow" (click)="save(form)"
+          class="btn btn-primary px-5 d-flex flex-row d-grid gap-2">
+          <i class="bi bi-check-lg"></i>
+          Add
+        </button>
+      </section>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,72 @@
+<div class="global-container container-fluid col-md-12">
+  <div class="container-fluid card-Question my-4 py-3 overflow-auto">
+
+    <div class="col-md-12 col-12 d-flex justify-content-between flex-wrap">
+      <div class="d-flex align-content-center align-items-center">
+        <img class="add-icon" src="../../../assets/icons/icon-title.png"> &nbsp;&nbsp;
+        <h4 class="my-2"><b>Studies</b></h4>
+      </div>
+      <div class="d-flex align-items-center pr-1 pb-1 pb-md-0">
+        <button class="col-md-5 d-flex flex-grow-1 btn btn-primary ml-1 d-flex align-items-center justify-content-center add-btn"
+          rippleEffect (click)="goToPage('/home/study/add')">
+          <img class="icon-add" src="../../../../assets/icons/addStudy.svg" alt="icon Add New Study"> &nbsp;
+          <span>Add Study</span>
+        </button>
+      </div>
+    </div>
+    <span class="counter pull-right"></span>
+    <div class="col-md-4 my-2">
+      <input type="text" class="search form-control " placeholder="search..." [(ngModel)]="searchValue"
+        name="searchValue">
+    </div>
+
+    <table class="table results sortable overflow-scroll">
+      <thead>
+        <tr>
+          <th scope="col">Title</th>
+          <th class="col-survey" scope="col">Number of surveys</th>
+          <th class="col-survey" scope="col">Date created</th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+        </tr>
+        <tr class="warning no-result" *ngIf="!studies.length">
+          <td colspan="4"><i class="fa fa-exclamation-triangle"></i> No Result</td>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let study of studies | paginate: { itemsPerPage: 5,currentPage: q }">
+          <td>{{study.title}}</td>
+          <td class="">{{study?.surveys?.length}}</td>
+          <td>{{study.createdDate?.toString()?.slice(0,10)}}</td>
+          <td>
+            <a class="btn show-details-btn d-flex flex-row d-grid gap-2 gap-sm-1 fs-6 justify-content-center align-content-center align-items-center"
+              data-toggle="modal" data-target="#myModal" (click)="showDetails(study)">
+              <i class="bi bi-eye icon-size"></i>
+              <span class="icon- fw-light">Details</span>
+            </a>
+          </td>
+          <td>
+            <a class="btn update-icon d-flex flex-row d-grid gap-2 fs-6 justify-content-center align-content-center align-items-center"
+              (click)="onUpdate(study)">
+              <i class="bi bi-pencil-square icon-size"></i>
+              <span class="icon- fw-light">Edit</span>
+            </a>
+          </td>
+          <td>
+            <a class="btn delete-icon d-flex flex-row d-grid gap-2 justify-content-center align-content-center align-items-center"
+              (click)="onDelete(study)">
+              <i class="fa fa-trash icon-size"></i>
+              <span class="icon- fw-light">Delete</span>
+            </a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="d-flex justify-content-center pagination-">
+      <pagination-controls (pageChange)="q = $event"></pagination-controls>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,182 @@
+<div class="global-container container-fluid col-md-12">
+    <div class="d-flex flex-row justify-content-between flex-wrap card-Question py-3">
+        <section class="col-md-6 d-flex flex-wrap flex-column align-items-center py-4">
+            <h6 class="fs-3 fw-bold">Invite patients to fill out the survey</h6>
+            <p class="text-center text-wrap text-dark py-2 lh-lg">
+                Your survey will be shown to patients by adding their email below:<br>
+                The patient can answer this survey using a private link found in their email box.
+            </p>
+            <div class="d-flex flex-column container-fluid py-4 flex-wrap align-items-center justify-content-center">
+                <tag-input [(ngModel)]='emails' class="input-invite mh-75 col-lg-8 col-xs-3" #tagInput name="emails"
+                    #email="ngModel" [errorMessages]="errorMessages" [validators]="validators" [editable]='true'
+                    [pasteSplitPattern]="splitPattern" [separatorKeyCodes]="[32,188,186,13,9]"
+                    [placeholder]="'Add email'" [secondaryPlaceholder]="'Enter email address(es)'" [clearOnBlur]="true"
+                    [addOnPaste]="true" [addOnBlur]="true" [onAdding]="onAddedFunc" theme='bootstrap' required>
+                </tag-input>
+            </div>
+
+            <div class="row">
+                <hr class="hr-text" data-content="OR">
+                <div class="d-flex d-grid gap-2 align-items-baseline">
+                    <p class="text-center text-wrap text-muted pt-1">
+                        import a full list of emails
+                    </p>
+                    <input type="file" accept=".csv" (change)="handleFileSelect($event)" />
+                </div>
+            </div>
+
+            <div
+                class="d-flex flex-row d-grid gap-2 my-4 justify-content-center align-content-center align-items-center">
+                <button (click)="send()" style="font-size: 0.6vw;" class="btn btn-primary col-md-10 mt-1">
+                    <i class="bi bi-send"></i> &nbsp;
+                    send
+                </button>
+                <button routerLink="/survey/list" style="font-size: 0.6vw;"
+                    class="btn btn-outline-primary col-md-10 mt-1">
+                    <i class="bi bi-x-lg"></i> &nbsp;
+                    Cancel
+                </button>
+            </div>
+
+            <div class="d-flex flex-column w-75 row">
+                <p class="text-wrap text-dark py-2 lh-lg d-flex flex-column">
+                    <b>Scheduling option :</b>
+                    <span class="text-center">
+                        Schedule and automate notifications to get the Patient answers Survey.
+                    </span>
+                </p>
+                <div class="d-flex d-grid gap-2 align-items-baseline">
+                    <p class="text-wrap text-muted pt-1">
+                        Get notified if answered?
+                    </p>
+                    <div>
+                        <input type="radio" id="no" value="no" name="radio" [(ngModel)]="notify">
+                        <label for="no" class="text-muted">No</label>
+                    </div>
+                    <div>
+                        <input type="radio" id="yes" value="yes" name="radio" [(ngModel)]="notify">
+                        <label for="yes" class="text-muted">Yes</label>
+                    </div>
+                </div>
+
+                <div class="d-flex d-grid gap-2 align-items-baseline w-100">
+                    <ng-container *ngIf="notify === 'yes'">
+                        <p class="text-wrap text-muted pt-1">
+                            Get Notified when score is lower than :
+                        </p>
+                        <div class="col-md-3 mt-1">
+                            <select class="select form-select text-muted" [(ngModel)]="selectedOption">
+                                <option value="0">Immediately</option>
+                                <option value="1">1 point</option>
+                                <option value="2">2 points</option>
+                                <option value="3">3 points</option>
+                                <option value="4">4 points</option>
+                                <option value="5">5 points</option>
+                                <option value="6">6 points</option>
+                                <option value="7">7 points</option>
+                                <option value="8">8 points</option>
+                                <option value="9">9 points</option>
+                                <option value="10">10 points</option>
+                                <option value="15">15 points</option>
+                                <option value="20">20 points</option>
+                            </select>
+                        </div>
+                    </ng-container>
+                </div>
+            </div>
+        </section>
+        <section class="d-flex flex-column col-md-5 py-4">
+            <h6 class="fs-3 fw-bold text-center">Schedule this survey</h6>
+            <p class="text-center text-wrap text-muted py-2 lh-lg">
+                When do you want your survey to be sent out?&nbsp;<b>Select a reminder.</b>
+            </p>
+
+            <div class="d-flex flex-column col-md-12 d-grid gap-1 flex-sm-wrap align-items-baseline">
+
+                <div class="d-flex justify-content-center align-items-baseline d-grid gap-2 col-md-11">
+                    <div style="padding-top:1.5% !important" class="d-flex col-md-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24">
+                            <path fill="#1B1E8B"
+                                d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8s8 3.58 8 8s-3.58 8-8 8zm.5-13H11v6l5.25 3.15l.75-1.23l-4.5-2.67z" />
+                        </svg>
+                        &nbsp;
+                        <h5><b>Select time zone &nbsp; :</b></h5>
+                    </div>
+
+                    <select name="timeZone" [ngModel]="selectedTz" (ngModelChange)="timeZoneChanged($event)"
+                        class="select form-select text-black selet-text-">
+                        <option *ngFor="let tz of tzNames" [value]="tz">
+                            {{ tz }}
+                        </option>
+                    </select>
+                </div>
+
+                <div class="d-flex justify-content-center align-items-baseline d-grid gap-2 col-md-11">
+                    <div style="padding-top:1.5% !important" class="d-flex col-md-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 32 32"><path fill="#1B1E8B" d="m30 23.382l-2-1V20a6.005 6.005 0 0 0-5-5.91V12h-2v2.09A6.005 6.005 0 0 0 16 20v2.382l-2 1V28h6v2h4v-2h6ZM28 26H16v-1.382l2-1V20a4 4 0 0 1 8 0v3.618l2 1Z"/><path fill="#1B1E8B" d="M28 6a2 2 0 0 0-2-2h-4V2h-2v2h-8V2h-2v2H6a2 2 0 0 0-2 2v20a2 2 0 0 0 2 2h4v-2H6V6h4v2h2V6h8v2h2V6h4v6h2Z"/></svg>
+
+                        &nbsp;
+                        <h5><b>Select validity &nbsp;:</b></h5>
+                    </div>
+                    <select [(ngModel)]="validity" class="select form-select text-black selet-text-">
+                        <option *ngFor="let vl of validityOptions" class="option">{{vl}}</option>
+                    </select>
+                </div>
+
+                <div class="d-flex flex-column col-md-11">
+                    <div class="d-flex align-items-baseline d-grid gap-2">
+                        <div style="padding-top:1.5% !important" class="d-flex col-md-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path fill="#1B1E8B" d="M10 8v6l4.7 2.9l.8-1.2l-4-2.4V8z"/><path fill="#1B1E8B" d="M17.92 12A6.957 6.957 0 0 1 11 20c-3.9 0-7-3.1-7-7s3.1-7 7-7c.7 0 1.37.1 2 .29V4.23c-.64-.15-1.31-.23-2-.23c-5 0-9 4-9 9s4 9 9 9a8.963 8.963 0 0 0 8.94-10h-2.02z"/><path fill="#1B1E8B" d="M20 5V2h-2v3h-3v2h3v3h2V7h3V5z"/></svg>
+                            &nbsp;
+                            <h5><b>Pick Time(s) &nbsp; :</b></h5>
+                        </div>
+                        <mat-form-field appearance="outline" class="selet-text-">
+                            <input class="px-1" matInput [ngxMatTimepicker]="picker" [format]="24"
+                                placeholder="4:00 PM" />
+
+                            <ngx-mat-timepicker #picker defaultTime="00:00" (closed)="onDatepickerClose(picker)"
+                                (timeChanged)="onChangeHour($event)">
+                            </ngx-mat-timepicker>
+                        </mat-form-field>
+
+                        <ngx-mat-timepicker #picker defaultTime="00:00"
+                            (timeChanged)="onChangeHour($event)"></ngx-mat-timepicker>
+                    </div>
+
+                    <div class="d-flex ">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24">
+                        <path fill="#1B1E8B" d="M12 14q-.425 0-.712-.288Q11 13.425 11 13t.288-.713Q11.575 12 12 12t.713.287Q13 12.575 13 13t-.287.712Q12.425 14 12 14Zm-4 0q-.425 0-.713-.288Q7 13.425 7 13t.287-.713Q7.575 12 8 12t.713.287Q9 12.575 9 13t-.287.712Q8.425 14 8 14Zm8 0q-.425 0-.712-.288Q15 13.425 15 13t.288-.713Q15.575 12 16 12t.712.287Q17 12.575 17 13t-.288.712Q16.425 14 16 14Zm-4 4q-.425 0-.712-.288Q11 17.425 11 17t.288-.712Q11.575 16 12 16t.713.288Q13 16.575 13 17t-.287.712Q12.425 18 12 18Zm-4 0q-.425 0-.713-.288Q7 17.425 7 17t.287-.712Q7.575 16 8 16t.713.288Q9 16.575 9 17t-.287.712Q8.425 18 8 18Zm8 0q-.425 0-.712-.288Q15 17.425 15 17t.288-.712Q15.575 16 16 16t.712.288Q17 16.575 17 17t-.288.712Q16.425 18 16 18ZM5 22q-.825 0-1.413-.587Q3 20.825 3 20V6q0-.825.587-1.412Q4.175 4 5 4h1V3q0-.425.287-.713Q6.575 2 7 2t.713.287Q8 2.575 8 3v1h8V3q0-.425.288-.713Q16.575 2 17 2t.712.287Q18 2.575 18 3v1h1q.825 0 1.413.588Q21 5.175 21 6v14q0 .825-.587 1.413Q19.825 22 19 22Zm0-2h14V10H5v10Z"/></svg>&nbsp;
+                    <h5><b>Selected Times &nbsp; :</b></h5>
+                    </div>
+                    <div class="selected- selected-Time px-1 py-2">
+                        <div *ngFor="let time of times ; let i = index">
+                            <span
+                                class="time- rounded border border-secondary d-flex justify-content-center align-items-center d-grid gap-1">
+                                {{ time }}
+                                <i class="fa fa-trash" (click)='deleteTime(i)'></i>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="d-flex flex-row d-grid gap-3 flex-wrap align-items-center">
+                <div (click)="$event.stopPropagation()" class="drop-calendar col-md-7 ">
+                    <mat-calendar class="col-md-12" #calendar (selectedChange)="select($event,calendar)"
+                        [dateClass]="isSelected"></mat-calendar>
+                </div>
+
+                <div class="d-flex flex-column col-md-4">
+                    <h5><b>Selected Dates:</b></h5>
+                    <div class="box mat-dialog-container- selected- selected-Date px-1 py-1">
+                        <div *ngFor="let date of dates">
+                            <span class="rounded border border-secondary">
+                                {{ date.zone("+09:00").format('YYYY/MM/DD')}}
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>

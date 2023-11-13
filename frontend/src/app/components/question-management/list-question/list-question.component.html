@@ -1,0 +1,74 @@
+<div class="global-container container-fluid col-md-12">
+  <div class="container-fluid card-Question my-4 py-3 overflow-auto">
+
+    <div class="col-md-12 col-12 d-flex justify-content-between flex-wrap">
+      <div class="d-flex align-content-center align-items-center">
+        <img class="add-icon" src="../../../assets/icons/icon-title.png"> &nbsp;&nbsp;
+        <h4 class="my-2"><b>Questions</b></h4>
+      </div>
+      <div class="d-flex align-items-center pr-1 pb-1 pb-md-0">
+        <button style="font-size:0.8vw ;"
+          class="col-md-5 d-flex flex-grow-1 btn btn-primary ml-1 d-flex align-items-center justify-content-center"
+          rippleEffect (click)="goToPage('/home/question/add')">
+          <img src="../../../../assets/icons/add-question.svg" alt="icon Add New Study"> &nbsp;
+          <span>Add Question</span> 
+        </button>
+      </div>
+    </div>
+
+    <span class="counter pull-right"></span>
+    <div class="col-md-4 my-2">
+      <input type="text" class="search form-control" placeholder="search..." [(ngModel)]="searchValue"
+        name="searchValue">
+    </div>
+    <table class="table results sortable">
+      <thead>
+        <tr>
+          <th scope="col">Question</th>
+          <th scope="col">Creator</th>
+          <th scope="col">Date created</th>
+          <th scope="col">Language</th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+        </tr>
+        <tr *ngIf="!questions" class="warning no-result">
+          <td colspan="4"><i class="fa fa-exclamation-triangle"></i> No Result</td>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let question of questions| paginate: { itemsPerPage: 10,currentPage: q } | filter:searchValue">
+          <td>{{question.text}}</td>
+          <td>{{question.createdBy}}</td>
+          <td>{{question.createdDate.toString().slice(0,10)}}</td>
+          <td>{{question.language}}</td>
+          <td>
+            <a class="btn show-details-btn d-flex flex-row d-grid gap-2 gap-sm-1 fs-6 justify-content-center align-content-center align-items-center"
+              data-toggle="modal" data-target="#myModal" (click)="showDetails(question)">
+              <i class="bi bi-eye icon-size"></i>
+              <span class="icon- fw-light">Details</span>
+            </a>
+          </td>
+          <td>
+            <a (click)="onUpdate(question)"
+              class="btn update-icon d-flex flex-row d-grid gap-2 fs-6 justify-content-center align-content-center align-items-center">
+              <i class="bi bi-pencil-square icon-size"></i>
+              <span class="icon- fw-light">Edit</span>
+            </a>
+          </td>
+          <td>
+            <a class="btn delete-icon d-flex flex-row d-grid gap-2 justify-content-center align-content-center align-items-center"
+              (click)="onDelete(question)">
+              <i class="fa fa-trash"></i>
+              <span class="icon- fw-light icon-size">Delete</span>
+            </a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="d-flex justify-content-center pagination-">
+      <pagination-controls (pageChange)="q = $event"></pagination-controls>
+    </div>
+  </div>
+</div>

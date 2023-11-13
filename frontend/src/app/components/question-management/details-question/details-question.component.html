@@ -1,0 +1,71 @@
+<div class="modal-dialog modal-dialog-centered modal-dialog-scrollable container-fluid overflow-hidden">
+    <div class="container-fluid overflow-hidden">
+        <div class="d-flex justify-content-between align-items-baseline">
+            <h4 class="modal-title" id="myModalLabel">Question Details</h4>
+            <section class="d-flex flex-row d-grid gap-4">
+                <i class="bi bi-pencil-square"></i>
+                <i class="bi bi-trash3"></i>
+                <i class="bi bi-x-lg" data-bs-dismiss="modal" aria-label="Close"></i>
+            </section>
+        </div>
+        <hr>
+
+        <section class="d-flex flex-column flex-wrap col-md-12">
+
+            <div class="">
+                <span class="d-flex flex-row d-grid gap-2">
+                    <i class="bi bi-question-square"></i>
+                    <h5><b>Question</b></h5>
+                </span>
+                <div class="px-4">
+                    <small class="">{{question.text}}</small>
+                </div>
+            </div>
+
+            <div class="pt-4">
+                <span class="d-flex flex-row d-grid gap-2">
+                    <i class="bi bi-chat-right-text"></i>
+                    <h5><b>Choices</b></h5>
+                </span>
+                <div class="d-flex flex-column">
+                    <small class="mx-4"><i class="bi bi-dash-lg"></i>&nbsp;{{question.answerChoices[0].text}}</small>
+                    <small class="mx-4"><i class="bi bi-dash-lg"></i>&nbsp;{{question.answerChoices[1].text}}</small>
+                </div>
+            </div>
+
+            <div class="d-flex flex-row flex-wrap justify-content-between pt-4">
+                <div class="col-md-3">
+                    <span class="d-flex flex-row d-grid gap-2">
+                        <i class="bi bi-translate"></i>
+                        <h5><b>Language</b></h5>
+                    </span>
+                    <small class="mx-4">{{question.language}}</small>
+                </div>
+    
+                <div class="col-md-3">
+                    <span class="d-flex flex-row d-grid gap-2">
+                        <i class="bi bi-text-indent-left"></i>
+                        <h5><b>Type</b></h5>
+                    </span>
+                    <small class="mx-4">{{question.typeQuestion.text || "no data"}}</small>
+                </div>
+
+            </div>
+        </section>
+
+        <hr class="hr-b">
+
+        <section class="d-flex flex-row flex-wrap justify-content-between pt-4">
+            <small class="d-flex flex-row flex-wrap align-items-sm-start align-items-xs-end d-grid gap-2">
+                    <i class="bi bi-person-bounding-box"></i>
+                    <b>Creator</b>
+                <span>{{question.createdBy}}</span>
+            </small>
+            <small class="d-flex flex-row flex-wrap align-items-sm-start align-items-xs-end d-grid gap-2 col-md-3">
+                    <i class="bi bi-calendar"></i>
+                    <b>Date Created</b>
+                <span>{{question.createdDate?.toString()?.slice(0,10)}}</span>
+            </small>
+        </section>
+    </div>
+</div>

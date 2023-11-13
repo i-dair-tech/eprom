@@ -1,0 +1,85 @@
+@use "~@angular/material" as mat;
+@import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css");
+@import "~bootstrap/dist/css/bootstrap.css";
+
+@import  '~@swimlane/ngx-datatable/index.css';
+@import  '~@swimlane/ngx-datatable/themes/material.css';
+@import  '~@swimlane/ngx-datatable/themes/dark.css';
+@import  '~@swimlane/ngx-datatable/themes/bootstrap.css';
+@import  '~@swimlane/ngx-datatable/assets/icons.css';
+
+@include mat.core();
+
+$mobileIdFe-primary: mat.define-palette(mat.$indigo-palette);
+$mobileIdFe-accent: mat.define-palette(mat.$pink-palette, A200, A100, A400);
+$mobileIdFe-warn: mat.define-palette(mat.$red-palette);
+$mobileIdFe-theme: mat.define-light-theme(
+    (
+      color: (
+        primary: $mobileIdFe-primary,
+        accent: $mobileIdFe-accent,
+        warn: $mobileIdFe-warn,
+      ),
+    )
+);
+@include mat.all-component-themes($mobileIdFe-theme);
+
+html,
+body {
+  @media (max-width: 400px) {
+    display: flex !important;
+    height: 100%;
+    width: 100%;
+  }
+  @media (min-width: 401px) and (max-width: 1199px) {
+    display: flex !important;
+    height: 100%;
+    width: 100%;
+  }
+  @media (min-width: 1200px) {
+    display: flex !important;
+    height: 100%;
+    width: 100%;
+  }
+}
+body {
+  margin: 0;
+  font-family: var(--font-family-roboto);
+}
+mat-sidenav-content{
+  height: calc(100vh - 65px);
+
+}
+
+:root {
+  --white: #ffffff;
+  --primary: #00b0b0;
+  --text: #1b1b1b;
+  --sec: #b00000;
+  --x198989: #198989;
+  --storm-gray2: #747480;
+  --black: #000000;
+  --eerie-black2: #1e1e1e;
+  --thunderbird: #bc1e1e;
+  --sonic-silver: #737373;
+  --french-gray: #b9b9c3;
+  --alabaster: #fafafa80;
+  --observatory: #02897a;
+  --mist-gray: #c4c4c4;
+  --teal: #067f7f;
+  --font-size-m2: 16px;
+  --font-size-l2: 36px;
+  --font-size-xxxxxl: 80px;
+  --font-size-xl3: 24px;
+  --font-size-s2: 14px;
+  --font-size-xl2: 48px;
+  --font-size-xxl: 32px;
+  --font-family-roboto: "Roboto", Helvetica;
+}
+.form-control.required {
+  border: 1px solid red;
+}
+
+.required {
+  color: red;
+}

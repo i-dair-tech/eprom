@@ -1,0 +1,160 @@
+.hide {
+  display: none;
+}
+
+.global-container {
+  position: absolute;
+  top: 0;
+  margin-top: 7vw !important;
+}
+
+.container-survey {
+  position: absolute;
+  top: 0;
+  width: 80%;
+  right: 10vw;
+  margin-top: 6vw !important;
+} 
+
+.card-Question {
+  background-color: #fff;
+  border: 1px solid rgba(217, 217, 217, 0.5);
+  box-shadow: 0px 4px 4px rgba(255, 255, 255, 0.25);
+  border-radius: 8px;
+  padding-top: 10% !important;
+}
+
+.card-survey {
+  background-color: #fff;
+  border: 1px solid rgba(217, 217, 217, 0.5);
+  box-shadow: 0px 4px 4px rgba(255, 255, 255, 0.25);
+  border-radius: 8px;
+}
+
+p {
+  font-size: 0.9vw;
+}
+
+h1 {
+  color: #2C5EBA;
+  font-size: 2vw;
+}
+
+h2 {
+  color: #1F1F20;
+  font-size: 1.7vw;
+}
+
+h3{
+  font-size: 1.2vw;
+  font-weight: bold;
+  line-height:35px !important;
+  background-color: #081A51;
+  border-radius: 5px;
+  color:#fff;
+  padding:1% 2% !important;
+  width: 100% !important;
+}
+
+h4 {
+  color: #5F5F5F;
+  font-size: 0.8vw;
+}
+
+h5 {
+  color: #353535;
+  font-weight: bold;
+  font-size: 0.8vw;
+  letter-spacing: 0.08em;
+}
+
+.details-survey{
+  h6 {
+    font-weight: 700;
+    font-size: 0.7vw;
+    letter-spacing: 0.06em;
+    color: rgba(0, 0, 0, 0.7);
+  }
+
+  p{
+    font-size: 0.6vw;
+    color: rgba(0, 0, 0, 0.55);
+    text-align: justify;
+  }
+}
+
+.hr {
+  width: 50vw;
+}
+.checkbox-type{
+  min-width:20px !important;
+}
+.contact-doc:hover {
+  background-color: #0E75BB;
+  color: #fff;
+  border-radius: 8px;
+  padding: 0.3vw 0.8vw;
+  cursor: pointer;
+}
+
+button {
+  font-size: 0.8vw;
+}
+
+.email-icon {
+  display: flex;
+  justify-content: center;
+  justify-items: center;
+  align-items: center;
+  align-content: center;
+}
+
+.email-icon img {
+  width: 2.5vw !important;
+  padding-top: 1vw;
+}
+
+input[type="radio"] {
+  transform: scale(1.5); /* decrease the scale from 2 to 1.5 */
+  accent-color: #377DFF;
+}
+label{
+  font-size: 16px; /* increase the font size from 1vw to 16px */
+}
+
+input.star:checked ~ label.star:before {
+  color: pink !important;
+}
+.star {
+  width: 270px !important;
+  font-size: 20px !important; /* increase the font size from 10px to 20px */
+}
+
+@media only screen and (max-width: 576px) {
+  .img-done {
+    width: 5vw;
+  }
+  input[type="radio"] {
+    transform: scale(1);
+  }
+}
+
+@media only screen and (min-width: 577px) {
+  .img-done {
+    width: 10vw;
+    height: 10vw;
+  }
+  input[type="radio"] {
+    transform: scale(1);
+  }
+}
+
+@media only screen and (min-width: 992px) {
+  .img-done {
+    width: 5vw;
+    height: 5vw;
+  }
+  input[type="radio"] {
+    transform: scale(1.5);
+  }
+}

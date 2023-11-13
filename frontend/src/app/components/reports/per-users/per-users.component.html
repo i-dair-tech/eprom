@@ -1,0 +1,99 @@
+<div class="global-container container-fluid col-md-12">
+  <div class="d-flex flex-row flex-wrap d-grid gap-3">
+    <div class="container col-md-2">
+      <i class="icon-- bi bi-person-badge"></i>
+      <span class="num" data-val="280">{{number_users}}</span>
+      <span class="text px-2 text-wrap">Total Number of Users</span>
+    </div>
+
+    <div class="container col-md-2">
+      <i class="icon-- bi bi-person-badge"></i>
+      <span class="num" data-val="280">{{patients_number}}</span>
+      <span class="text px-2 text-wrap">Number of Patients </span>
+    </div>
+
+    <div class="container col-md-2">
+      <i class="icon-- bi bi-person-badge"></i>
+      <span class="num" data-val="280">{{admins_number}}</span>
+      <span class="text px-2 text-wrap">Users with Admin authority </span>
+    </div>
+
+    <div class="container col-md-2">
+      <i class="icon-- bi bi-person-badge"></i>
+      <span class="num" data-val="280">{{studyCoordinators_number}}</span>
+      <span class="text">Users with Study Coo. authority </span>
+    </div>
+ 
+  </div>
+
+  <div class="my-5 d-flex flex-column container-fluid justify-content-center align-items-center">
+
+    <section class="my-5 d-flex flex-row col-md-8 justify-content-around align-items-center flex-wrap">
+      <!-- email -->
+      <div class="col-md-4 d-flex align-content-center flex-column">
+        <label class="d-flex flex-row py-1 d-grid gap-2 align-baseline align-items-center">
+          <i class="bi bi-envelope-at"></i>
+          Search By email:
+        </label>
+        <input class="form-control inner form-control-sm" type="text" [(ngModel)]="searchTerm"
+          placeholder="Search by email" />
+      </div>
+      <!-- list -->
+      <div class="col-md-4 ">
+        <label class="d-flex flex-row py-1 d-grid gap-2 align-baseline align-items-center">
+          <i class="bi bi-list-nested"></i>
+          List of Users
+        </label>
+        <select [(ngModel)]="selectedPatient" class="form-select form-select-sm">
+          <option *ngFor="let patient of filteredPatients" value={{patient.email}}>
+            {{ patient.email }}
+          </option>
+        </select>
+      </div>
+      <!-- btn -->
+      <div class="d-flex flex-column justify-content-center align-items-center">
+        <label class="text--">
+          !
+        </label>
+        <button [disabled]="!selectedPatient" (click)="onSelectPatient()" type="submit"
+          class="btn btn-primary d-flex d-grid gap-2">
+          <i class="bi bi-check-lg"></i>
+          Show Data
+        </button>
+      </div>
+    </section>
+
+    <article class="my-5 d-flex flex-row col-md-10 justify-content-between flex-wrap">
+      <section class="d-flex flex-column justify-content-center align-content-center col-md-8">
+        <div class="d-flex d-grid gap-1 align-items-baseline">
+          <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="#081A51" class="bi bi-reception-3" viewBox="0 0 16 16">
+            <path d="M0 11.5a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1-.5-.5v-2zm4-3a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 .5.5v5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1-.5-.5v-5zm4-3a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 .5.5v8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1-.5-.5v-8zm4 8a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5z"/>
+          </svg>          <h2 class="fw-bold">Score Evolution</h2>
+        </div>
+        <div *ngIf="show" echarts [options]="option" style="width:50vw; height: 25vw;"></div>
+      </section>
+      
+      <section *ngIf="show" class="box mat-dialog-container- col-md-4">
+        <details>
+          <summary> View Details</summary>
+          <div class="py-1" *ngFor="let category of details | keyvalue ; let i = index">
+            <h5><b>Survey &nbsp;{{i+1}} : {{ category.key }}</b></h5>
+            <div class="py-1" *ngFor="let check of category.value">
+
+              <div class="d-flex">
+                <i class="bi bi-bar-chart"></i>&nbsp;
+                <p><b>Score</b>&nbsp; {{ check.score }}</p>
+              </div>
+              <div class="d-flex align-items-strech">
+                <i class="bi bi-calendar"></i>
+                <p><b>Answer Date</b>&nbsp; {{ check.createdDate.toString().slice(0,10) }}</p>
+              </div>
+            </div>
+            <hr>
+          </div>
+        </details>
+      </section>
+    </article>
+
+  </div>
+</div>

@@ -1,0 +1,106 @@
+<div class="global-container container-fluid col-md-12">
+    <div class="container-profile col-md-12 container-fluid card-Question my-4 py-3">
+        <div class="profile-section">
+          <div class="profile">
+            <img 
+              src="https://w7.pngwing.com/pngs/753/432/png-transparent-user-profile-2018-in-sight-user-conference-expo-business-default-business-angle-service-people-thumbnail.png" 
+              alt="Some random men picture ">
+            <div class="profile-details">
+              <h2 class="profile-name">{{userInfo.lastName}}</h2>
+              <div class="profile-id text-center">
+                <span>{{role}}</span>
+               </div>
+            </div>
+          </div>
+          <div class="edit-section">
+            <div class="btn">
+              <a href="#"><i class="bi bi-pencil-square"></i>Edit</a>
+            </div>
+          </div>
+        </div>
+        <div class="main-section">
+            <div class="cards d-flex flex-row flex-wrap">
+              <div class="card selected">
+                <div class="followers">
+                  <div class="d-flex flex-row justify-content-between">
+                    <h5>People Reached</h5>
+                    <div class="profit-percent">
+                      <i class="fas fa-caret-up"></i>
+                      <span>7%</span>
+                    </div>
+                  </div>
+                  <h3>1 090</h3>
+                </div>
+              </div>
+              <div class="card">
+                <div class="followers">
+                  <div class="d-flex flex-row justify-content-between">
+                    <h5>Studies Engagements</h5>
+                    <div class="profit-percent">
+                      <i class="fas fa-caret-up"></i>
+                      <span>25%</span>
+                    </div>
+                  </div>
+                  <h3>305</h3>
+                </div>
+              </div>
+              <div class="card">
+                <div class="followers">
+                  <div class="d-flex flex-row justify-content-between">
+                    <h5>Surveys</h5>
+                    <div class="profit-percent">
+                      <i class="fas fa-caret-up"></i>
+                      <span>18%</span>
+                    </div>
+                  </div>
+                  <h3>51</h3>
+                </div>
+              </div>
+            </div>
+    
+            <div class="details mt-4 d-flex flex-column flex-wrap">
+              <h3>About</h3>
+              
+              <section class="d-flex flex-row flex-wrap py-1">
+                <span class="w-25 d-flex flex-row d-grid gap-2 ">
+                  <i class="bi bi-person-workspace"></i> 
+                  <h4><b>Speciality</b></h4>
+                </span>
+                <p>Doctor</p> 
+              </section>
+    
+              <section class="d-flex flex-row flex-wrap py-1">
+                <span class="w-25 d-flex flex-row d-grid gap-2">
+                  <i class="bi bi-translate"></i> 
+                  <h4><b>Language</b></h4>
+                </span>
+                <p>{{userInfo.langKey}}</p> 
+              </section>
+    
+              <section class="d-flex flex-row flex-wrap py-1">
+                <span class="w-25 d-flex flex-row d-grid gap-2">
+                  <i class="bi bi-flag"></i> 
+                  <h4><b>Country</b></h4>
+                </span>
+                <p>Tunisia</p> 
+              </section>
+    
+              <section class="d-flex flex-row flex-wrap py-1">
+                <span class="w-25 d-flex flex-row d-grid gap-2">
+                  <i class="bi bi-envelope-open"></i>
+                  <h4><b>Email</b></h4>
+                </span>
+                <p>{{userInfo.email}}</p> 
+              </section>
+    
+              <section class="d-flex flex-row flex-wrap py-1">
+                <span class="w-25 d-flex flex-row d-grid gap-2">
+                  <i class="bi bi-telephone"></i> 
+                  <h4><b>Phone number</b></h4>
+                </span>
+                <p>+216 27 100 300</p> 
+              </section>
+            </div>
+        </div>
+    </div>
+    </div>
