@@ -1,5 +1,4 @@
 package com.dqlick.eprom;
-
 import com.dqlick.eprom.config.ApplicationProperties;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
@@ -19,8 +18,13 @@ import tech.jhipster.config.DefaultProfileUtil;
 import tech.jhipster.config.JHipsterConstants;
 
 @SpringBootApplication
-@EnableConfigurationProperties({ LiquibaseProperties.class, ApplicationProperties.class })
+@EnableConfigurationProperties({ LiquibaseProperties.class, ApplicationProperties.class ,Credential.class })
 public class EpromApp {
+
+	
+  private Logger logger = LoggerFactory.getLogger(EpromApp .class);
+
+  private Credential credential;
 
     private static final Logger log = LoggerFactory.getLogger(EpromApp.class);
 
@@ -40,6 +44,11 @@ public class EpromApp {
      */
     @PostConstruct
     public void initApplication() {
+//      logger.info("----------------------------------------");
+//      logger.info("Configuration properties fetched from Vault");
+//      logger.info("   mail.username is {}", credential.getUserName());
+//      logger.info("   mail.password is {}", credential.getPassword());
+//      logger.info("----------------------------------------");
         Collection<String> activeProfiles = Arrays.asList(env.getActiveProfiles());
         if (
             activeProfiles.contains(JHipsterConstants.SPRING_PROFILE_DEVELOPMENT) &&

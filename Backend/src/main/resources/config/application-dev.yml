@@ -37,7 +37,7 @@ spring:
     type: com.zaxxer.hikari.HikariDataSource
     url: jdbc:postgresql://localhost:5432/eprom
     username: postgres
-    password: postgres
+    password: admin2022
     hikari:
       poolName: Hikari
       auto-commit: false
@@ -52,8 +52,8 @@ spring:
   mail:
     host: smtp-mail.outlook.com
     port: 587
-    username: your-account@i-dair
-    password: your-password
+    username: ${mail.username}
+    password: ${mail.password}
     protocol: smtp
     tls: true
     properties.mail.smtp:
@@ -83,7 +83,7 @@ spring:
       pool:
         size: 5
 server:
-  port: 8080
+  port: 8100
 
 # ===================================================================
 # JHipster specific properties
