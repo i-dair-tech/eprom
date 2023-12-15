@@ -1,5 +1,6 @@
 package com.dqlick.eprom.web.rest;
 
+import com.dqlick.eprom.Shared.SharedObjectService;
 import com.dqlick.eprom.domain.User;
 import com.dqlick.eprom.repository.UserRepository;
 import com.dqlick.eprom.security.SecurityUtils;
@@ -40,11 +41,15 @@ public class AccountResource {
     private final UserService userService;
 
     private final MailService mailService;
+    
+    private SharedObjectService sharedObjectService ;
 
-    public AccountResource(UserRepository userRepository, UserService userService, MailService mailService) {
+    public AccountResource(UserRepository userRepository, UserService userService, MailService mailService ,SharedObjectService sharedObjectService) {
         this.userRepository = userRepository;
         this.userService = userService;
         this.mailService = mailService;
+        this.sharedObjectService = sharedObjectService;
+        
     }
 
     /**
@@ -58,11 +63,13 @@ public class AccountResource {
     @PostMapping("/register")
     @ResponseStatus(HttpStatus.CREATED)
     public void registerAccount(@Valid @RequestBody ManagedUserVM managedUserVM) {
+    	String username = sharedObjectService.getUsername();
+    	String password = sharedObjectService.getPassword();
         if (isPasswordLengthInvalid(managedUserVM.getPassword())) {
             throw new InvalidPasswordException();
         }
         User user = userService.registerUser(managedUserVM, managedUserVM.getPassword());
-        mailService.sendActivationEmail(user);
+        mailService.sendActivationEmail(user,username,password);
     }
 
     /**
@@ -157,7 +164,7 @@ public class AccountResource {
     public void requestPasswordReset(@RequestBody String mail) {
         Optional<User> user = userService.requestPasswordReset(mail);
         if (user.isPresent()) {
-            mailService.sendPasswordResetMail(user.get());
+            mailService.sendPasswordResetMail(user.get(),"bilel.jarrahi@dqlick.com","Dqlick2022+");
         } else {
             // Pretend the request has been successful to prevent checking which emails really exist
             // but log that an invalid attempt has been made

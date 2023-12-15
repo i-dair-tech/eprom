@@ -17,7 +17,7 @@ public interface InvitationService {
      *
      * @param invitation the entity to save.
      */
-    void create(InvitationDTO invitation,MultipartFile file,  String ipAdress , String entity) throws FileNotFoundException;
+    void create(InvitationDTO invitation,MultipartFile file,  String ipAdress , String entity,String username, String password) throws FileNotFoundException;
 
 
 

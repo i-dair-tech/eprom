@@ -1,6 +1,7 @@
 package com.dqlick.eprom.web.rest;
 
 
+import com.dqlick.eprom.Shared.SharedObjectService;
 import com.dqlick.eprom.domain.Invitation;
 import com.dqlick.eprom.repository.InvitationRepository;
 import com.dqlick.eprom.service.InvitationService;
@@ -8,12 +9,10 @@ import com.dqlick.eprom.service.MailService;
 
 import com.dqlick.eprom.service.dto.InvitationDTO;
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -40,21 +39,23 @@ public class InvitationResource {
 
     private final MailService mailService;
 
-
-    public InvitationResource(InvitationService invitationService, InvitationRepository invitationRepository, MailService mailService) {
+    private SharedObjectService sharedObjectService ;
+    
+    public InvitationResource(InvitationService invitationService, InvitationRepository invitationRepository, MailService mailService,SharedObjectService sharedObjectService) {
         this.invitationService = invitationService;
         this.invitationRepository = invitationRepository;
         this.mailService = mailService;
+        this.sharedObjectService = sharedObjectService;
     }
 
 
     @PostMapping("/invitations" )
     public void createInvitation(@RequestParam("data")String invitation, @RequestParam(value = "file", required =
-        false) MultipartFile file, HttpServletRequest request) throws URISyntaxException, FileNotFoundException, JsonProcessingException {
+        false) MultipartFile file, HttpServletRequest request,String username,String password) throws URISyntaxException, FileNotFoundException, JsonProcessingException {
 
         ObjectMapper mapper = new ObjectMapper();
         InvitationDTO object = new ObjectMapper().readValue(invitation, InvitationDTO.class);
-            invitationService.create(object, file, request.getRemoteAddr(), ENTITY_NAME);
+            invitationService.create(object, file, request.getRemoteAddr(), ENTITY_NAME,username,password);
 
     }
 

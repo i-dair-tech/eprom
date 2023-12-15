@@ -1,5 +1,6 @@
 package com.dqlick.eprom.web.rest;
 
+import com.dqlick.eprom.Shared.SharedObjectService;
 import com.dqlick.eprom.config.Constants;
 import com.dqlick.eprom.domain.User;
 import com.dqlick.eprom.repository.UserRepository;
@@ -89,11 +90,14 @@ public class UserResource {
     private final UserRepository userRepository;
 
     private final MailService mailService;
+    
+    private SharedObjectService sharedObjectService ;
 
-    public UserResource(UserService userService, UserRepository userRepository, MailService mailService) {
+    public UserResource(UserService userService, UserRepository userRepository, MailService mailService,SharedObjectService sharedObjectService) {
         this.userService = userService;
         this.userRepository = userRepository;
         this.mailService = mailService;
+        this.sharedObjectService = sharedObjectService;
     }
 
     /**
@@ -113,6 +117,8 @@ public class UserResource {
     public ResponseEntity<User> createUser(@Valid @RequestBody AdminUserDTO userDTO,  HttpServletRequest request) throws URISyntaxException {
         log.debug("REST request to save User : {}", userDTO);
 
+        String username = sharedObjectService.getUsername();
+    	String password = sharedObjectService.getPassword();
         if (userDTO.getId() != null) {
             throw new BadRequestAlertException("A new user cannot already have an ID", "userManagement", "idexists");
             // Lowercase the user login before comparing with database
@@ -122,7 +128,7 @@ public class UserResource {
             throw new EmailAlreadyUsedException();
         } else {
             User newUser = userService.createUser(userDTO, request.getRemoteAddr() , ENTITY_NAME);
-            mailService.sendCreationEmail(newUser);
+            mailService.sendCreationEmail(newUser,username,password);
             return ResponseEntity
                 .created(new URI("/api/admin/users/" + newUser.getLogin()))
                 .headers(

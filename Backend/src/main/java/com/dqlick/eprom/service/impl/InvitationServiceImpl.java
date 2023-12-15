@@ -1,6 +1,7 @@
 package com.dqlick.eprom.service.impl;
 
 
+import com.dqlick.eprom.Shared.SharedObjectService;
 import com.dqlick.eprom.config.Constants;
 import com.dqlick.eprom.domain.Invitation;
 import com.dqlick.eprom.domain.InvitationCron;
@@ -68,11 +69,15 @@ public class InvitationServiceImpl implements InvitationService {
     private final TaskScheduler executor;
 
     private static final String COMMA_DELIMITER = ",";
+    
+    private final SharedObjectService sharedObjectService ;
+
+    
 
     @PersistenceContext
     private EntityManager entityManager;
 
-    public InvitationServiceImpl(InvitationRepository invitationRepository, LogService logService, SurveyService surveyService, InvitationCronRepository invitationCronRepository, SurveyRepository surveyRepository, UserService userService, UserRepository userRepository, MailService mailService, AuthorityRepository authorityRepository, InvitationCronService invitationCronService, TaskScheduler executor) {
+    public InvitationServiceImpl(InvitationRepository invitationRepository, LogService logService, SurveyService surveyService, InvitationCronRepository invitationCronRepository, SurveyRepository surveyRepository, UserService userService, UserRepository userRepository, MailService mailService, AuthorityRepository authorityRepository, InvitationCronService invitationCronService, TaskScheduler executor,SharedObjectService sharedObjectService) {
         this.invitationRepository = invitationRepository;
         this.logService = logService;
         this.invitationCronRepository = invitationCronRepository;
@@ -83,13 +88,26 @@ public class InvitationServiceImpl implements InvitationService {
         this.authorityRepository = authorityRepository;
         this.invitationCronService = invitationCronService;
         this.executor = executor;
+        this.sharedObjectService = sharedObjectService;
+
     }
 
 
 
     @Override
-    public void create(InvitationDTO invitationDTO, MultipartFile file ,  String ipAdress, String entity) throws FileNotFoundException {
+    public void create(InvitationDTO invitationDTO, MultipartFile file ,  String ipAdress, String entity, String username, String password) throws FileNotFoundException {
 
+        String usernameShared = sharedObjectService.getUsername();
+        String passwordShared = sharedObjectService.getPassword();
+
+//        sharedObjectService.setUsername(username);
+//        sharedObjectService.setPassword(password);
+//        System.out.println("Value from SharedObjectService: " + usernameShared);
+//
+//        System.out.println("New Value from SharedObjectService: " + passwordShared);
+
+//        System.out.println("usernaame in invitation impl :"+username);
+//        System.out.println("password in invitation impl :"+password);
 
         String user = "";
         if (getCurrentUserLogin().isPresent()) {
@@ -100,12 +118,31 @@ public class InvitationServiceImpl implements InvitationService {
         String finalUser = user;
 
 
+//        Set<InvitationCron> temp = new HashSet<>();
+//        invitationDTO.getInvitationCrons().forEach(cron -> {
+//            InvitationCron jcron = new InvitationCron();
+//            jcron.setCronDate(cron);
+//            //jcron.setStatus(ScheduleStatus.NOT_EXECUTED);
+//            InvitationCron result = invitationCronService.save(jcron);
+//            temp.add(result);
+//
+//        });
+
         if (invitationDTO.getEmails() != null && !invitationDTO.getEmails().isEmpty()) {
             invitationDTO.getEmails().forEach(element -> {
 
                 //invitation created
                 Invitation invitation = new Invitation();
                 invitation.setEmail(element.toLowerCase());
+//                List<Invitation> toDelete = invitationRepository.findAllByEmailAndSurvey(element.toLowerCase(), Long.valueOf(invitationDTO.getSurvey_id()));
+//                toDelete.forEach(surveyAlreadySent ->{
+//                    List<InvitationCron> temp = invitationCronRepository.findAllByInvitationId(surveyAlreadySent.getId());
+//                    invitationCronRepository.deleteAll(temp);
+//
+//                });
+//
+//                 invitationRepository.deleteAll(toDelete);
+
                 Survey survey = surveyRepository.findOneWithEagerRelationships(Long.valueOf(invitationDTO.getSurvey_id())).get();
                 invitation.setSurvey(survey);
                 invitation.setCreatedBy(finalUser);
@@ -117,6 +154,24 @@ public class InvitationServiceImpl implements InvitationService {
 
 
                 Invitation future = invitationRepository.save(invitation);
+
+
+           /*     List<Date> dates = new ArrayList<>();
+
+                invitationDTO.getInvitationCrons().forEach(cron -> {
+                    // int index = this.generateCronExpression(cron.getCronDate()).lastIndexOf(" ");
+                    //String s = this.generateCronExpression(cron.getCronDate()).substring(0, index);
+                    InvitationCron jcron = new InvitationCron();
+                    jcron.setCronDate(cron);
+                    //jcron.setStatus(ScheduleStatus.NOT_EXECUTED);
+                    jcron.setInvitation(future);
+                    InvitationCron result = invitationCronService.save(jcron);
+
+                    Date s = result.getCronDate();
+                    dates.add(s);
+
+                });*/
+
 
                 List<Date> dates = invitationDTO.getInvitationCrons().stream()
                     .map(cron -> {
@@ -138,7 +193,7 @@ public class InvitationServiceImpl implements InvitationService {
                                 (existingUser) -> {
                                     future.setStatus(InvitationStatus.SENT);
                                     invitationRepository.save(future);
-                                    mailService.sendConnectionEmail(existingUser);
+                                    mailService.sendConnectionEmail(existingUser,usernameShared,passwordShared);
                                 },
                                 ()
                                     -> {
@@ -161,7 +216,7 @@ public class InvitationServiceImpl implements InvitationService {
                                     User newPatient = userService.createUser(patient, ipAdress, finalUser);
                                     future.setStatus(InvitationStatus.SENT);
                                     invitationRepository.save(future);
-                                    mailService.sendCreationEmail(newPatient);
+                                    mailService.sendCreationEmail(newPatient,usernameShared,passwordShared);
 
                                 });
 
@@ -195,6 +250,15 @@ public class InvitationServiceImpl implements InvitationService {
                 Matcher mat = pattern.matcher(email);
                 if(mat.matches()){
 
+//                        List<Invitation> toDelete = invitationRepository.findAllByEmailAndSurvey(email.toLowerCase(), Long.valueOf(invitationDTO.getSurvey_id()));
+//                        toDelete.forEach(surveyAlreadySent ->{
+//                            List<InvitationCron> temp = invitationCronRepository.findAllByInvitationId(surveyAlreadySent.getId());
+//                            invitationCronRepository.deleteAll(temp);
+//
+//                        });
+//                        invitationRepository.deleteAll(toDelete);
+
+
                     //invitation creation
                     Invitation invitation = new Invitation();
                     invitation.setEmail(email.toLowerCase());
@@ -207,6 +271,20 @@ public class InvitationServiceImpl implements InvitationService {
 
 
                     Invitation future = invitationRepository.save(invitation);
+
+                    //List<Date> dates = new ArrayList<>();
+                       /* invitationDTO.getInvitationCrons().forEach(cron -> {
+                            // int index = this.generateCronExpression(cron.getCronDate()).lastIndexOf(" ");
+                            //String s = this.generateCronExpression(cron.getCronDate()).substring(0, index);
+                            InvitationCron jcron = new InvitationCron();
+                            jcron.setCronDate(cron);
+                            //jcron.setStatus(ScheduleStatus.NOT_EXECUTED);
+                            jcron.setInvitation(future);
+                            InvitationCron resultCron = invitationCronService.save(jcron);
+
+                            Date s = resultCron.getCronDate();
+                            dates.add(s);
+                        });*/
 
                     List<Date> dates = invitationDTO.getInvitationCrons().stream()
                         .map(cron -> {
@@ -227,7 +305,7 @@ public class InvitationServiceImpl implements InvitationService {
                                     (existingUser) -> {
                                         future.setStatus(InvitationStatus.SENT);
                                         invitationRepository.save(future);
-                                        mailService.sendConnectionEmail(existingUser);
+                                        mailService.sendConnectionEmail(existingUser,username,password);
 
                                     },
                                     ()
@@ -251,7 +329,7 @@ public class InvitationServiceImpl implements InvitationService {
                                         User newPatient = userService.createUser(patient, ipAdress, finalUser);
                                         future.setStatus(InvitationStatus.SENT);
                                         invitationRepository.save(future);
-                                        mailService.sendCreationEmail(newPatient);
+                                        mailService.sendCreationEmail(newPatient,username,password);
 
                                     });
 
@@ -266,7 +344,8 @@ public class InvitationServiceImpl implements InvitationService {
 
     }
 
-    @Override
+
+	@Override
     public List<Invitation> findAllByEmail(String email) {
         return invitationRepository.findAllByEmail(email);
     }

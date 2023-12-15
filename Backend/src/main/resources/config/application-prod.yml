@@ -35,7 +35,7 @@ spring:
     type: com.zaxxer.hikari.HikariDataSource
     url: jdbc:postgresql://localhost:5432/eprom
     username: postgres
-    password: admin2022
+    password: postgres
     hikari:
       poolName: Hikari
       auto-commit: false
@@ -50,8 +50,8 @@ spring:
   mail:
     host: smtp-mail.outlook.com
     port: 587
-    username: your-account@i-dair
-    password: your-password
+    username: bilel.jarrahi@dqlick.com
+    password: Dqlick2022+
     protocol: smtp
     tls: true
     properties.mail.smtp:
@@ -111,7 +111,7 @@ server:
 jhipster:
   cors:
     # Allow Ionic for JHipster by default (* no longer allowed in Spring Boot 2.4+)
-    allowed-origins: 'http://localhost:8100,http://54.89.107.172:4200,https://54.89.107.172:4200,http://54.89.107.172,https://54.89.107.172,https://localhost:8100,http://localhost:9000,https://localhost:9000,http://localhost:4200,https://localhost:4200,http://127.0.0.1:4200,http://3.83.44.21/,http://3.83.44.21:8080/,http://3.83.44.21,http://3.83.44.21:8080,https://3.83.44.21/,http://n8n.chavi.ai,https://n8n.chavi.ai,https://111.93.172.141/,http://111.93.172.141,https://111.93.172.141:4200,http://111.93.172.141:4200'
+    allowed-origins: 'http://localhost:8100,https://localhost:8100,http://localhost:9000,https://localhost:9000,http://localhost:4200,https://localhost:4200,http://127.0.0.1:4200,http://3.83.44.21/,https://3.83.44.21/,https://n8n.chavi.ai'
     # Enable CORS when running in GitHub Codespaces
     allowed-origin-patterns: 'https://*.githubpreview.dev'
     allowed-methods: '*'
