@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { AddNewUserComponent } from './add-new-user/add-new-user.component';
 import { ListUsersComponent } from './list-users/list-users.component';
 import { UpdateUserComponent } from './update-user/update-user.component';
+import { MailConfigComponent } from './mail-config/mail-config.component';
 
 const routes: Routes = [
   {
@@ -16,6 +17,11 @@ const routes: Routes = [
   {
     path: 'update',
     component: UpdateUserComponent
+  }
+  ,
+  {
+    path: 'config',
+    component: MailConfigComponent
   }
 ];
 

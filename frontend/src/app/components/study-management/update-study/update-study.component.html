@@ -1,46 +1,50 @@
 <div class="global-container container-fluid">
   <div class="card-Question container-fluid py-4">
-  <h4 class="my-2"><b> Update Study </b></h4>
-  <form style="font-size:0.8vw ;" class="task-form form-row" [formGroup]="form" autocomplete="off">
-    <div class="container-fluid my-4">
-      <label for="title">Study Title:</label>
-      <input style="font-size:0.8vw ;" type="text" class="form-control" name="title" id="title" formControlName="title"
-        oninput="this.value=this.value.toUpperCase()">
-    </div>
-
-    <section class="d-flex d-grid flex-md-row flex-sm-column my-4">
-      <div class="container-fluid">
-        <label for="surveys">List of Surveys:</label>
-        <div cdkDropList #todoList="cdkDropList" [cdkDropListData]="rows" [cdkDropListConnectedTo]="[doneList]"
-          class="example-list" (cdkDropListDropped)="drop($event)">
-          <div style="font-size:0.8vw ;" class="example-box text-bg-light" *ngFor="let item of rows" cdkDrag>
-            {{item.title}}</div>
-        </div>
+    <h4 class="my-2"><b> Update Study </b></h4>
+    <p style="font-size: 0.9vw;" class="text-justify text-wrap container-fluid text-format my-3">
+      Stay in control of your studies. Modify the information you'd like to change and hit 'Save' to make quick and precise updates to your study list.
+    </p>
+    <form style="font-size:0.8vw ;" class="task-form form-row" [formGroup]="form" autocomplete="off">
+      <div class="container-fluid my-4">
+        <label for="title">Study Title:</label>
+        <input style="font-size:0.8vw ;" type="text" class="form-control" name="title" id="title"
+          formControlName="title" oninput="this.value=this.value">
       </div>
 
-      <i class="bi bi-arrow-left-right text-primary my-5 py-5 fs-5"></i>
-      
-      <div class="container-fluid mt-3">
-        <div cdkDropList #doneList="cdkDropList" [cdkDropListData]="selected" [cdkDropListConnectedTo]="[todoList]"
-          class="example-list" (cdkDropListDropped)="drop($event)">
-          <div style="font-size:0.8vw ;" class="example-box" *ngFor="let item of selected" cdkDrag>{{item.title}}</div>
+      <section class="d-flex d-grid flex-md-row flex-sm-column my-4">
+        <div class="container-fluid">
+          <label for="surveys">List of Surveys:</label>
+          <div cdkDropList #todoList="cdkDropList" [cdkDropListData]="rows" [cdkDropListConnectedTo]="[doneList]"
+            class="example-list" (cdkDropListDropped)="drop($event)">
+            <div style="font-size:0.8vw ;" class="example-box text-bg-light" *ngFor="let item of rows" cdkDrag>
+              {{item.title}}</div>
+          </div>
         </div>
-      </div>
-    </section>
 
-    <section class="d-flex flex-row flex-wrap my-5 justify-content-end btn-">
-      <button style="font-size:0.8vw ;" class="btn btn-outline-primary px-4 d-flex d-grid flew-row gap-2"
-        (click)="resetFormWithDefaultValues()">
-        <i class="bi bi-clipboard-x"></i>
-        Reset
-      </button>
+        <i class="bi bi-arrow-left-right text-primary my-5 py-5 fs-5"></i>
 
-      <button style="font-size:0.8vw ;" type="submit" class="btn btn-primary px-4 d-flex flex-row d-grid gap-2"
-        (click)="save()">
-        <i class="bi bi-clipboard-plus"></i>
-        Save
-      </button>
-    </section>
-  </form>
-</div>
+        <div class="container-fluid mt-3">
+          <div cdkDropList #doneList="cdkDropList" [cdkDropListData]="selected" [cdkDropListConnectedTo]="[todoList]"
+            class="example-list" (cdkDropListDropped)="drop($event)">
+            <div style="font-size:0.8vw ;" class="example-box" *ngFor="let item of selected" cdkDrag>{{item.title}}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="d-flex flex-row flex-wrap my-5 justify-content-end btn-">
+        <button style="font-size:0.8vw ;" class="btn btn-outline-primary px-4 d-flex d-grid flew-row gap-2"
+        (click)="goToPage('/home/study/list')"> 
+          <i class="bi bi-clipboard-x"></i>
+          Cancel
+        </button>
+
+        <button style="font-size:0.8vw ;" type="submit" class="btn btn-primary px-4 d-flex flex-row d-grid gap-2"
+          (click)="save()">
+          <i class="bi bi-clipboard-plus"></i>
+          Save
+        </button>
+      </section>
+    </form>
+  </div>
 </div>

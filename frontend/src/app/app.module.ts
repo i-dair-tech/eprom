@@ -58,7 +58,12 @@ import { NgxEchartsModule } from 'ngx-echarts';
 import { NotificationsComponent } from './components/notifications/notifications.component';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { LandingpageComponent } from './components/landingpage/landingpage.component'
-
+import {InputTextModule} from 'primeng/inputtext';
+import { ButtonModule } from 'primeng/button';
+import { TableModule } from 'primeng/table';
+import { OverlayPanelModule } from 'primeng/overlaypanel';
+import {PanelModule} from 'primeng/panel';
+import { MenuModule } from 'primeng/menu';
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -124,6 +129,13 @@ export function createTranslateLoader(http: HttpClient) {
       timeOut: 15000, // 15 seconds
       progressBar: true,
     }),
+    InputTextModule,
+    OverlayPanelModule,
+		TableModule,
+    ButtonModule,
+    PanelModule,
+    MenuModule
+
   ],
 
   providers: [

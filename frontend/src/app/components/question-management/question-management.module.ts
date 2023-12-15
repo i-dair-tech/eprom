@@ -9,6 +9,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { FilterPipe } from 'src/app/_shared/pipe/filter.pipe';
 
+import {InputTextModule} from 'primeng/inputtext';
 
 
 
@@ -31,6 +32,7 @@ import { FilterPipe } from 'src/app/_shared/pipe/filter.pipe';
     ReactiveFormsModule,
     FormsModule,
     ModalModule.forRoot(),
+    InputTextModule
 
     
   ],

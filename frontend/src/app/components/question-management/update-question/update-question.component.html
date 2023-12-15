@@ -1,8 +1,7 @@
-<div class="global-container container-fluid card-Question">
+<div class="global-container container-fluid card-Question col-md-11">
   <h4 class="my-2"><b> Update Question</b></h4>
   <p style="font-size: 0.9vw;" class="text-justify text-wrap container-fluid text-format my-3">
-    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
-    aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+    Stay in control of your questions. Modify the information you'd like to change and hit 'Save' to make quick and precise updates to your question list.
   </p>
 
   <form style="font-size:0.8vw ;" class="task-form form-row my-4" [formGroup]="form">
@@ -47,7 +46,7 @@
       <div>
         <label for="card-num">Please add the question text :</label>
         <input type="text" name="text" id="text" formControlName="text" required
-          oninput="this.value=this.value.toUpperCase()" />
+          oninput="this.value=this.value" />
       </div>
       <div *ngIf="f.text.errors?.required " class="text text-danger">
         text is required
@@ -55,21 +54,22 @@
     </section>
 
     <section class="container-fluid my-4">
-      <div class="d-flex flex-row flex-wrap flex-container d-grid gap-3" formArrayName="answerChoices">
+      <div class="d-flex flex-row flex-wrap flex-container" formArrayName="answerChoices">
         <ng-container *ngFor="let pattern of getControls(form, 'answerChoices'); let i = index">
-          <ng-container *ngFor="let pattern of getControls(form, 'answerChoices'); let i = index">
-            <div style="font-size:0.8vw ;" [formGroupName]="i" class="position-relative col-md-3">
-              <input placeholder="Option {{i+1}}" style="font-size:0.8vw ;" type="text" name="text" formControlName="text"
-                class="form-control inner" />
-                <div class="alert alert-danger mt-2" *ngIf="form.get('answerChoices.'+i+'.text')?.invalid && (form.get('answerChoices.'+i+'.text')?.dirty || form.get('answerChoices.'+i+'.text')?.touched)" >Invalid Input. Please enter a valid one like :  'yes (1 point)'</div>
-                <button type="button" class="position-absolute btn icon-delete" (click)="removeItem(i)">
-                <i class="bi bi-trash-fill"></i>
-              </button>
-            </div>
-          </ng-container>
+          <div style="font-size:0.8vw ;" [formGroupName]="i" class="position-relative col-md-3">
+            <input placeholder="Option {{i+1}}" style="font-size:0.8vw ;" type="text" name="text"
+              formControlName="text" class="form-control inner mb-2" />
+            <input placeholder="enter point(s) of option {{i+1}}" style="font-size:0.8vw ;" type="text" name="text"
+              formControlName="additionalInput" class="form-control inner mt-2" />
+            <!-- <div class="alert alert-danger mt-2"
+              *ngIf="form.get('answerChoices.'+i+'.additionalInput')?.invalid && (form.get('answerChoices.'+i+'.additionalInput')?.dirty || form.get('answerChoices.'+i+'.additionalInput')?.touched)">
+              Invalid Input. Please enter a valid one</div> -->
+            <button type="button" class="position-absolute btn icon-delete" (click)="removeItem(i)">
+              <i class="bi bi-trash-fill"></i>
+            </button>
+          </div>
         </ng-container>
       </div>
-
       <div class="addoption-div" id="addOptionContainer">
         <div class="adminprofile-div">
           <div type="button" (click)="addItem()" class="icon-color">
@@ -88,7 +88,7 @@
       <button style="font-size:0.8vw ;" class="btn btn-outline-primary px-4 d-flex d-grid flew-row gap-2"
         (click)="goToPage('/home/question/list')">
         <i class="bi bi-clipboard-x"></i>
-        Reset
+        Cancel
       </button>
       <button style="font-size:0.8vw ;" (click)="onSubmit()" class="btn btn-primary px-4 d-flex flex-row d-grid gap-2"
         rippleEffect>

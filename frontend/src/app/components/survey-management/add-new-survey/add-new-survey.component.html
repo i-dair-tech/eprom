@@ -33,7 +33,7 @@
         </div>
 
         <div *ngIf="show" id="2" class="form-group col-md-12">
-          <div class="row container-fluid my-4">
+          <!-- <div class="row container-fluid my-4">
             <ngx-datatable tableClass="table table-striped table-bordered table-hover" [tableId]="'checkbox'"
               [data]="rows" [options]="options" limit="5" [columns]="columns" (checkboxClick)="onCheckboxClick($event)">
               <ngx-caption>
@@ -47,20 +47,41 @@
                 </div>
               </ngx-caption>
             </ngx-datatable>
-          </div>
-        </div>
+          </div> -->
 
-        <div *ngIf="show" id="2" class="form-group">
-          <div class="row container-fluid my-4" *ngIf="chkBoxSelected.length !==0">
-            <div cdkDropList #todoList="cdkDropList" [cdkDropListData]="chkBoxSelected" class="example-list"
-              (cdkDropListDropped)="drop($event)">
-              <div class="example-box mt-2 col-md-12" *ngFor="let item of chkBoxSelected" cdkDrag>{{item.text}} <i
-                  class="bi bi-trash-fill" (click)="remove(item)"></i></div>
-            </div>
+
+
+
+          <div class="row container-fluid my-4">
+
+            <section class="container-fluid d-flex flex-column d-grid flex-md-row flex-sm-column my-4">
+              <div>
+                <label for="surveys"><b>List of Questions:</b></label>
+                <p>Create your survey by effortlessly dragging and dropping questions.<br> Find specific questions swiftly with the convenient search bar, allowing you to include relevant keywords for a seamless and efficient customization process.</p>
+                <input type="text" [formControl]="searchText" class="mb-3" placeholder="Search questions">
+              </div>
+
+              <div class="col-md-12 d-flex flex-row flew-wrap justify-content-between">
+                <div cdkDropList #todoList="cdkDropList" [cdkDropListData]="rows" [cdkDropListConnectedTo]="[doneList]"
+                  class="example-list col-md-6" (cdkDropListDropped)="dropDrag($event)">
+                  <div style="font-size:0.8vw;" class="example-box text-bg-light" *ngFor="let item of filteredRows"
+                    cdkDrag>
+                    {{ item.text }}
+                  </div>
+                </div>
+                <i class="bi bi-arrow-left-right text-primary mx-5 my-5 py-5 fs-5"></i>
+
+                <div cdkDropList #doneList="cdkDropList" [cdkDropListData]="selected"
+                  [cdkDropListConnectedTo]="[todoList]" class="example-list col-md-5" (cdkDropListDropped)="dropDrag($event)">
+                  <div style="font-size:0.8vw ;" class="example-box text-bg-light" *ngFor="let item of selected" cdkDrag>{{item.text}}
+                  </div>
+                </div>
+              </div>
+              
+            </section>
           </div>
         </div>
       </section>
-
       <section class="d-flex flex-row flex-wrap my-5 justify-content-end btn-">
 
         <button style="font-size:0.8vw ;" type="submit" (click)="previous()" [disabled]="!pervshow"
