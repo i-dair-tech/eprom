@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
+import { AbstractControl, FormArray, FormBuilder, FormGroup, ValidationErrors, ValidatorFn } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import Swal from 'sweetalert2';
@@ -56,7 +56,12 @@ export class UpdateQuestionComponent implements OnInit {
       isArchived: null,
       archivedDate: null,
       typeQuestion: null,
-      answerChoices: this.fb.array([]),
+      answerChoices: this.fb.array([], {
+        validators: [
+          this.duplicateTextValidator(),
+          this.duplicateAdditionalInputValidator()
+        ]
+      }),
 
     });
 
@@ -74,6 +79,26 @@ export class UpdateQuestionComponent implements OnInit {
         this._questionsService.getQuestionById(id).subscribe(data => {
            data;
 
+           data.answerChoices.forEach((choice: any) => {
+            // const match = choice.text.match(/\((\d+) points\)/);
+            // if (match && match[1]) {
+            //   choice.additionalInput = parseInt(match[1], 10);
+            // }            
+            // // choice.text = choice.text.replace(/\(\d+ points\)/, '').trim();
+            const match = choice.text.match(/\d+/);
+
+            if (match) {
+              choice.additionalInput = parseInt(match[0], 10);
+            }
+            const lastIndex = choice.text.lastIndexOf('(');
+            if (lastIndex !== -1) {
+              choice.text = choice.text.substring(0, lastIndex).trim();
+            }
+          
+
+          });
+          console.log("dattttttttttaaa :",data);
+          
           if(data !== undefined ){
 
            let ques : Question = data          
@@ -95,8 +120,42 @@ export class UpdateQuestionComponent implements OnInit {
 
 
   }
-
-
+  duplicateAdditionalInputValidator(): ValidatorFn {
+    return (control: AbstractControl): ValidationErrors | null => {
+      const answerChoices = control.value as any[];
+      const uniqueAdditionalInputValues = new Set<string>();
+  
+      for (const choice of answerChoices) {
+        const additionalInputValue = choice.additionalInput.toString()?.toLowerCase();
+  
+        if (uniqueAdditionalInputValues.has(additionalInputValue)) {
+          return { duplicateAdditionalInput: true };
+        }
+  
+        uniqueAdditionalInputValues.add(additionalInputValue);
+      }
+  
+      return null;
+    };
+  }
+  duplicateTextValidator(): ValidatorFn {
+    return (control: AbstractControl): ValidationErrors | null => {
+      const answerChoices = control.value as any[];
+      const uniqueTextValues = new Set<string>();
+  
+      for (const choice of answerChoices) {
+        const textValue = choice.text?.toLowerCase();
+  
+        if (uniqueTextValues.has(textValue)) {
+          return { duplicateText: true };
+        }
+  
+        uniqueTextValues.add(textValue);
+      }
+  
+      return null;
+    };
+  }
 
   ngOnDestroy(): void {
     this._subscription.forEach(subscription => subscription.unsubscribe());
@@ -137,19 +196,21 @@ export class UpdateQuestionComponent implements OnInit {
       lastModifiedDate: element.lastModifiedDate,
       isArchived:element.isArchived,
       archivedDate: element.archivedDate,
+      additionalInput:element.additionalInput
     });
   }
 
 
   private _addOption() {
     return this.fb.group({
-      text:  [null , validAnswerChoice],
+      text:  [null],
       createdBy:null,
       createdDate:null,
       lastModifiedBy: null,
       lastModifiedDate: null,
       isArchived:null,
       archivedDate: null,
+      additionalInput: [null, validAnswerChoice],
     });
   }
 
@@ -171,6 +232,7 @@ export class UpdateQuestionComponent implements OnInit {
   public onSubmit() {
 
 
+
         if (this.form.invalid) {
           this.isValidFormSubmitted = false;
           
@@ -185,7 +247,11 @@ export class UpdateQuestionComponent implements OnInit {
 
         }
         else {
-
+          console.log("this.form.value add question update ::", this.form.value);
+          this.form.value.answerChoices.forEach((choice: any) => {
+            // choice.additionalInput = 10  ;
+            choice.text = `${choice.text} ( ${choice.additionalInput} points ) `;
+          });
           this.isValidFormSubmitted = true
           
             this._subscription.push(

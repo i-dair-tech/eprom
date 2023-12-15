@@ -18,4 +18,7 @@ export class DetailsSurveyComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  close() {
+      this.modalRef.hide();
+  }
 }

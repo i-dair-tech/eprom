@@ -10,7 +10,11 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { DetailsStudyComponent } from './details-study/details-study.component';
 import { ModalModule } from 'ngx-bootstrap/modal';
-
+import { ButtonModule } from 'primeng/button';
+import { TableModule } from 'primeng/table';
+import { OverlayPanelModule } from 'primeng/overlaypanel';
+import {PanelModule} from 'primeng/panel';
+import { MenuModule } from 'primeng/menu';
 
 
 @NgModule({
@@ -29,6 +33,11 @@ import { ModalModule } from 'ngx-bootstrap/modal';
     FormsModule,
     DragDropModule,
     ModalModule.forRoot(),
+    ButtonModule,
+    TableModule,
+    OverlayPanelModule,
+    PanelModule,
+    MenuModule
 
   ]
 })

@@ -151,12 +151,7 @@ export class UpdateStudyComponent implements OnInit {
     
   }
 
-
-
-  public resetFormWithDefaultValues() {
-    this.study.title = "";
-    this.selected = []
-    this.ngOnInit()
+  public goToPage(pageName: string) {
+    this._router.navigate([`${pageName}`]);
   }
-
 }

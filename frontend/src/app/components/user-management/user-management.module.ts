@@ -9,6 +9,7 @@ import { ModalModule } from 'ngx-bootstrap/modal';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { UpdateUserComponent } from './update-user/update-user.component';
 import { DetailsUserComponent } from './details-user/details-user.component';
+import { MailConfigComponent } from './mail-config/mail-config.component';
 
 
 @NgModule({
@@ -16,7 +17,8 @@ import { DetailsUserComponent } from './details-user/details-user.component';
     ListUsersComponent,
     AddNewUserComponent,
     UpdateUserComponent,
-    DetailsUserComponent
+    DetailsUserComponent,
+    MailConfigComponent
   ],
   imports: [
     CommonModule,
