@@ -1,15 +1,28 @@
 package com.dqlick.eprom.service;
 
+import com.dqlick.eprom.Shared.SharedObjectService;
 import com.dqlick.eprom.domain.User;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.nio.charset.StandardCharsets;
 import java.util.Locale;
+import java.util.Properties;
+
+import javax.mail.Message;
 import javax.mail.MessagingException;
+import javax.mail.Multipart;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
+import javax.mail.internet.MimeMultipart;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.mail.MailException;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -42,20 +55,25 @@ public class MailService {
 
     private final SpringTemplateEngine templateEngine;
 
-    public MailService(
-        JHipsterProperties jHipsterProperties,
-        JavaMailSender javaMailSender,
-        MessageSource messageSource,
-        SpringTemplateEngine templateEngine
-    ) {
-        this.jHipsterProperties = jHipsterProperties;
-        this.javaMailSender = javaMailSender;
-        this.messageSource = messageSource;
-        this.templateEngine = templateEngine;
-    }
+    private final  SharedObjectService sharedObjectService ;
 
-    @Async
-    public void sendEmail(String to, String subject, String content, boolean isMultipart, boolean isHtml) {
+
+
+    public MailService(
+            JHipsterProperties jHipsterProperties,
+            JavaMailSender javaMailSender,
+            MessageSource messageSource,
+            SpringTemplateEngine templateEngine,
+            SharedObjectService sharedObjectService
+        ) {
+            this.jHipsterProperties = jHipsterProperties;
+            this.javaMailSender = javaMailSender;
+            this.messageSource = messageSource;
+            this.templateEngine = templateEngine;
+            this.sharedObjectService = sharedObjectService;
+        }
+	@Async
+    public void sendEmail(String to, String subject, String content, boolean isMultipart, boolean isHtml,String username,String password) {
         log.debug(
             "Send email[multipart '{}' and html '{}'] to '{}' with subject '{}' and content={}",
             isMultipart,
@@ -65,21 +83,49 @@ public class MailService {
             content
         );
 
-        // Prepare message using a Spring helper
-        MimeMessage mimeMessage = javaMailSender.createMimeMessage();
-        try {
-            MimeMessageHelper message = new MimeMessageHelper(mimeMessage, isMultipart, StandardCharsets.UTF_8.name());
-            message.setTo(to);
-            message.setFrom(jHipsterProperties.getMail().getFrom());
-            message.setSubject(subject);
-            message.setText(content, isHtml);
-            javaMailSender.send(mimeMessage);
-            log.debug("Sent email to User '{}'", to);
-        } catch (MailException | MessagingException e) {
-            log.warn("Email could not be sent to user '{}'", to, e);
-        }
-    }
 
+    	Properties props = new Properties();
+    	props.put("mail.smtp.auth", true);
+    	props.put("mail.smtp.starttls.enable", true);
+//    	props.put("mail.smtp.host", "smtp-mail.outlook.com");
+        if (username.toLowerCase().endsWith("@gmail.com")) {
+            props.put("mail.smtp.host", "smtp.gmail.com");
+        } else {
+            props.put("mail.smtp.host", "smtp-mail.outlook.com");
+        }
+    	props.put("mail.smtp.port", "587");
+
+    	Session session = Session.getInstance(props,
+    	    new javax.mail.Authenticator() {
+    	        protected PasswordAuthentication getPasswordAuthentication() {
+    	            return new PasswordAuthentication(username, password);
+    	        }
+    	    }
+    	);
+    	MimeMessage mimeMessage = new MimeMessage(session);
+    	try {
+
+    	    Message message = new MimeMessage(session);
+    	    message.setFrom(new InternetAddress(username)); 
+    	    message.setSubject(subject);
+    	    message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(to));
+
+    	    MimeBodyPart messageBodyPart = new MimeBodyPart();
+    	    messageBodyPart.setText(content, "UTF-8", isHtml ? "html" : "plain");
+
+    	    Multipart multipart = new MimeMultipart();
+    	    multipart.addBodyPart(messageBodyPart);
+
+    	    message.setContent(multipart);
+
+    	    Transport.send(message);
+    	    System.out.println("Done");
+    	} catch (MailException | MessagingException e) {
+    	    log.warn("Email could not be sent to user '{}'", to, e);
+    	}
+
+
+    }
     @Async
     public void sendEmailWithAttachment(String to, String subject, String content, boolean isMultipart, boolean isHtml, String attachmentPath) {
         log.debug(
@@ -91,7 +137,6 @@ public class MailService {
             content
         );
 
-        // Prepare message using a Spring helper
         MimeMessage mimeMessage = javaMailSender.createMimeMessage();
         try {
             MimeMessageHelper message = new MimeMessageHelper(mimeMessage, isMultipart, StandardCharsets.UTF_8.name());
@@ -110,7 +155,7 @@ public class MailService {
 
 
     @Async
-    public void sendEmailFromTemplate(User user, String templateName, String titleKey) {
+    public void sendEmailFromTemplate(User user, String templateName, String titleKey,String username,String password) {
         if (user.getEmail() == null) {
             log.debug("Email doesn't exist for user '{}'", user.getLogin());
             return;
@@ -121,31 +166,31 @@ public class MailService {
         context.setVariable(BASE_URL, jHipsterProperties.getMail().getBaseUrl());
         String content = templateEngine.process(templateName, context);
         String subject = messageSource.getMessage(titleKey, null, locale);
-        sendEmail(user.getEmail(), subject, content, false, true);
+        sendEmail(user.getEmail(), subject, content, false, true,username,password);
     }
 
     @Async
-    public void sendActivationEmail(User user) {
+    public void sendActivationEmail(User user,String username,String password) {
         log.debug("Sending activation email to '{}'", user.getEmail());
-        sendEmailFromTemplate(user, "mail/activationEmail", "email.activation.title");
+        sendEmailFromTemplate(user, "mail/activationEmail", "email.activation.title",username,password);
     }
 
     @Async
-    public void sendCreationEmail(User user) {
+    public void sendCreationEmail(User user,String username,String password) {
         log.debug("Sending creation email to '{}'", user.getEmail());
-        sendEmailFromTemplate(user, "mail/creationEmail", "email.activation.title");
+        sendEmailFromTemplate(user, "mail/creationEmail", "email.activation.title",username,password);
     }
 
     @Async
-    public void sendPasswordResetMail(User user) {
+    public void sendPasswordResetMail(User user,String username,String password) {
         log.debug("Sending password reset email to '{}'", user.getEmail());
-        sendEmailFromTemplate(user, "mail/passwordResetEmail", "email.reset.title");
+        sendEmailFromTemplate(user, "mail/passwordResetEmail", "email.reset.title",username,password);
     }
 
     @Async
-    public void sendConnectionEmail(User user) {
+    public void sendConnectionEmail(User user,String username,String password) {
         log.debug("Sending creation email to '{}'", user.getEmail());
-        sendEmailFromTemplate(user, "mail/connectEmail", "email.connection.title");
+        sendEmailFromTemplate(user, "mail/connectEmail", "email.connection.title",username,password);
     }
 
 }

@@ -9,7 +9,7 @@
     <p th:text="#{email.connection.greeting(${user.login})}">Dear</p>
     <p th:text="#{email.connection.text1}">You are invited to pass a survey, please log in and answer the questions: please click on the URL below to access it:</p>
     <p>
-      <a th:with="url=(@{|http://3.83.44.21/#/auth/login|})" th:href="${url}" th:text="${url}">Login link</a>
+      <a th:with="url=(@{|${baseUrl}/#/auth/login|})" th:href="${url}" th:text="${url}">Login link</a>
     </p>
     <p>
       <span th:text="#{email.connection.text2}">Regards, </span>

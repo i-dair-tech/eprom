@@ -3,11 +3,4 @@
 # ===================================================================
 
 spring:
-  application:
-    name: mail-vault
   cloud:
-    vault:
-      kv:
-        enabled: true
-      scheme: http
-      token: 0000-2222-111
