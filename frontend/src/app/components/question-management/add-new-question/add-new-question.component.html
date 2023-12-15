@@ -4,87 +4,97 @@
       <img class="add-icon" src="../../../../assets/icons/icon-plus.png">&nbsp;&nbsp;
       <h4 class="my-2"><b> ADD QUESTION </b></h4>
     </section>
-  <p style="font-size: 0.9vw;" class="text-justify text-wrap container-fluid text-format my-3">
-    Add question to kick off your survey.<br>
-    Please select language, type, content and question options.
-  </p>
+    <p class="text-justify text-wrap container-fluid text-format my-3">
+      Add question to kick off your survey.<br>
+      Please select language, type, content and question options.
+    </p>
 
-  <form style="font-size:0.8vw ;" class="task-form form-row my-4" [formGroup]="form" autocomplete="off"
-    (submit)="onSubmit()">
-    <div class="col-sm-7">
-      <section class="d-flex flex-row container-fluid flex-wrap justify-content-between">
-        <div class="col-sm-4 flex-column">
-          <label for="language">Language :</label>
-          <select style="font-size:0.8vw ;" name="language" formControlName="language" required
-            class="form-select form-select-sm">
-            <option [ngValue]="undefined" selected disabled>-language-</option>
-            <option *ngFor="let item of languages" value="{{item.value}}">{{item.viewValue}}</option>
-          </select>
-          <div *ngIf="f.language.errors?.required && f.language.touched" class="text text-danger">
-            language is required
+    <form style="font-size:0.8vw ;" class="task-form form-row my-4" [formGroup]="form" autocomplete="off"
+      (submit)="onSubmit()">
+      <div class="col-sm-7">
+        <section class="d-flex flex-row container-fluid flex-wrap justify-content-between">
+          <div class="col-sm-4 flex-column">
+            <label for="language">Language :</label>
+            <select style="font-size:0.8vw ;" name="language" formControlName="language" required
+              class="form-select form-select-sm">
+              <option [ngValue]="undefined" selected disabled>-language-</option>
+              <option *ngFor="let item of languages" value="{{item.value}}">{{item.viewValue}}</option>
+            </select>
+            <div *ngIf="f.language.errors?.required && f.language.touched" class="text text-danger">
+              language is required
+            </div>
           </div>
-        </div>
-        
-        <div class="col-sm-4 flex-column">
-          <label for="typeQuestion">Question Type :</label>
-          <select style="font-size:0.8vw ;" name="typeQuestion" formControlName="typeQuestion"
-            class="form-select form-select-sm">
-            <option [ngValue]="undefined" selected disabled>-typeQuestion-</option>
-            <option *ngFor="let item of typeQuestions trackBy: trackQuestionTypeById" [ngValue]="item">{{item.text}}
-            </option>
-          </select>
-          <div *ngIf="f.typeQuestion.errors?.['required'] " class="text text-danger">
-            typeQuestion is required
+
+          <div class="col-sm-4 flex-column">
+            <label for="typeQuestion">Question Type :</label>
+            <select style="font-size:0.8vw ;" name="typeQuestion" formControlName="typeQuestion"
+              class="form-select form-select-sm">
+              <option [ngValue]="undefined" selected disabled>-typeQuestion-</option>
+              <option *ngFor="let item of typeQuestions trackBy: trackQuestionTypeById" [ngValue]="item">{{item!.text}}
+              </option>
+            </select>
+            <div *ngIf="f.typeQuestion.errors?.['required'] " class="text text-danger">
+              typeQuestion is required
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      <section class="container-fluid my-4">
-      <div class="col-sm-12 flex-column">
-        <label for="text">Question :</label>
-        <textarea style="font-size:0.8vw ;" placeholder="What question would you like to ask?" type="text" id="text" name="text" formControlName="text" required
-        oninput="this.value=this.value.toUpperCase()" class="form-control" rows="3"></textarea>
-      <div *ngIf="f.text.errors?.required && f.text.touched" class="text text-danger">
-        text is required
-      </div>
-      </div>
-      </section>
-
-      <section class="container-fluid my-4">
-      <label for="name">Choices :</label>
-      <div class="d-flex flex-row flex-wrap flex-container" formArrayName="answerChoices">
-        <ng-container *ngFor="let pattern of getControls(form, 'answerChoices'); let i = index">
-          <div style="font-size:0.8vw ;" [formGroupName]="i" class="position-relative col-md-3">
-            <input placeholder="Option {{i+1}}" style="font-size:0.8vw ;" type="text" name="text" formControlName="text"
-              class="form-control inner" />
-              <div class="alert alert-danger mt-2" *ngIf="form.get('answerChoices.'+i+'.text')?.invalid && (form.get('answerChoices.'+i+'.text')?.dirty || form.get('answerChoices.'+i+'.text')?.touched)" >Invalid Input. Please enter a valid one like :  'yes (1 point)'</div>
-            <button type="button" class="position-absolute btn icon-delete" (click)="removeItem(i)">
-              <i class="bi bi-trash-fill"></i>
-            </button>
+        <section class="container-fluid my-4">
+          <div class="col-sm-12 flex-column">
+            <label for="text">Question :</label>
+            <textarea style="font-size:0.8vw ;" placeholder="What question would you like to ask?" type="text" id="text"
+              name="text" formControlName="text" required oninput="this.value=this.value" class="form-control"
+              rows="3"></textarea>
+            <div *ngIf="f.text.errors?.required && f.text.touched" class="text text-danger">
+              text is required
+            </div>
           </div>
-        </ng-container>
+        </section>
+
+        <section class="container-fluid my-4">
+          <label for="name">Choices :</label>
+          <p class="text-format">Assign scores to choices. They will be used for visualizations and patient reports.</p>
+          <div class="d-flex flex-row flex-wrap flex-container" formArrayName="answerChoices">
+            <ng-container *ngFor="let pattern of getControls(form, 'answerChoices'); let i = index">
+              <div style="font-size:0.8vw ;" [formGroupName]="i" class="position-relative col-md-3">
+                  <input type="text" placeholder="Option {{i+1}}"  name="text" class="mb-2"  formControlName="text"  pInputText />
+                  <div *ngIf="form.get('answerChoices')?.hasError('duplicateInput')">
+                    <div class="alert alert-danger">
+                      Duplicate input values are not allowed.
+                    </div>
+                  </div>
+                  <span class="p-input-icon-right col-md-12">
+                  <i class="bi bi-trash-fill" (click)="removeItem(i)"></i>
+                  <input type="text" placeholder="point(s) of option {{i+1}}" class="mt-2" name="text" formControlName="additionalInput" pInputText />
+                </span>
+                <div class="alert alert-danger mt-2"
+                  *ngIf="form.get('answerChoices.'+i+'.additionalInput')?.invalid && (form.get('answerChoices.'+i+'.additionalInput')?.dirty || form.get('answerChoices.'+i+'.additionalInput')?.touched)">
+                  Invalid Input. Please enter a valid one</div>
+              </div>
+            </ng-container>
+          </div>
+          <div type="button" (click)="addItem()" class="icon-color">
+            <i class="bi bi-plus-lg icon-color"></i> &nbsp;
+            <b>Add choice</b>
+          </div>
+        </section>
       </div>
-      <div type="button" (click)="addItem()" class="icon-color">
-        <i class="bi bi-plus-lg icon-color"></i> &nbsp; 
-        <b>Add choice</b></div>
+
+      <section class="d-flex flex-row flex-wrap justify-content-end btn- mt-1 pt-1">
+
+        <button style="font-size:0.8vw ;" class="btn btn-outline-primary px-4 d-flex d-grid flew-row gap-2"
+          (click)="resetFormWithDefaultValues()">
+          <i class="bi bi-x-lg"></i>
+          Cancel
+        </button>
+
+        <button style="font-size:0.8vw ;" type="submit" value="Add"
+          class="btn btn-primary px-5 d-flex flex-row d-grid gap-2">
+          <i class="bi bi-check-lg"></i>
+          Add
+        </button>
+
       </section>
-    </div>
-
-    <section class="d-flex flex-row flex-wrap justify-content-end btn- mt-1 pt-1">
-
-      <button style="font-size:0.8vw ;" class="btn btn-outline-primary px-4 d-flex d-grid flew-row gap-2"
-        (click)="resetFormWithDefaultValues()">
-        <i class="bi bi-x-lg"></i>
-        Cancel
-      </button>
-
-      <button style="font-size:0.8vw ;" type="submit" value="Add"
-        class="btn btn-primary px-5 d-flex flex-row d-grid gap-2">
-        <i class="bi bi-check-lg"></i>
-        Add
-      </button>
-
-    </section>
-  </form>  
+    </form>
   </div>
 </div>

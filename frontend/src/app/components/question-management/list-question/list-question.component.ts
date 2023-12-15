@@ -129,7 +129,8 @@ export class ListQuestionComponent implements OnInit, OnDestroy {
         question: question,
       }
     });
-    this.modalRef.setClass('modal-lg');
+    // this.modalRef.setClass('modal-lg');
+    
   }
 
 }

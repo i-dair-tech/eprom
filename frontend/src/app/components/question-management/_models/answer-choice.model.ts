@@ -9,5 +9,6 @@ export class AnswerChoice {
     lastModifiedDate?: Date;
     isArchived?: Boolean;
     archivedDate?: Date;
+    additionalInput?:number;
 
 }

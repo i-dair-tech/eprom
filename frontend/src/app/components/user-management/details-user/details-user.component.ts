@@ -10,9 +10,15 @@ import { BsModalRef } from 'ngx-bootstrap/modal';
 export class DetailsUserComponent implements OnInit {
   user : UserDTO;
 
-  constructor() { }
+  constructor(
+    public modalRef: BsModalRef
+  ) { }
 
   ngOnInit(): void {
   }
+  close() {
+    
+    this.modalRef.hide();
+}
 
 }

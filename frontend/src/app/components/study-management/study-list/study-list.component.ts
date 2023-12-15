@@ -126,7 +126,7 @@ export class StudyListComponent implements OnInit {
           initialState: {
             study:study
           }
-        });
+        });        
         this.modalRef.setClass('modal-lg');
       }
 

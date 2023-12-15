@@ -58,6 +58,8 @@ export class InviteUsersComponent implements OnInit {
   public tzNames: string[];
 
   private addFirstAttemptFailed = false;
+  username="bilel.jarrahi@dqlick.com";
+  password="Dqlick2022+";
 
   private must_be_email(control: FormControl) {        
 
@@ -132,39 +134,28 @@ export class InviteUsersComponent implements OnInit {
         this.emails = this.emails.map((i:any) => i?.value)
       }
      
-      console.log("times:", this.times);
-      console.log("dates:", this.dates);
-
       for (let i = 0; i < this.times.length; i++) {
         this.dates.forEach(momentDate => {
-          // Convert Moment.js object to a Date object
           let el = momentDate.toDate();
       
-          // Check if the conversion was successful
           if (!(el instanceof Date) || isNaN(el.getTime())) {
             console.log("Invalid date object:", el);
             return;
           }
       
-          // Split time and convert to numbers
           let timeArr = this.times[i].split(":");
           let hours = Number(timeArr[0]);
           let minutes = Number(timeArr[1]);
       
-          // Create a new date by setting hours and minutes
           let manipulatedDate = new Date(el);
           manipulatedDate.setHours(hours);
           manipulatedDate.setMinutes(minutes);
-      
-          // Check if the resulting date is valid
-          if (!isNaN(manipulatedDate.getTime())) {
+                if (!isNaN(manipulatedDate.getTime())) {
             this.finalDates.push(manipulatedDate);
           }
         });
       }
-      
-      console.log("this.finalDates:", this.finalDates);
-      
+            
          
       this.invitation.emails = this.emails;
       this.invitation.survey_id = this.survey_id;
@@ -174,14 +165,17 @@ export class InviteUsersComponent implements OnInit {
       this.invitation.getNotified = this.notify == 'yes'? true : false ; 
       this.invitation.scoreNotif = this.selectedOption;
       this.invitation.timeZone = this.selectedTz;
-        
-      console.log("invitaion :",this.invitation);
-      
+              
       const formData = new FormData();
       formData.append('data', JSON.stringify(this.invitation))
       formData.append('file', this.emailsFile);
+      // formData.append('username', this.username);
+      // formData.append('password', this.password);
 
 
+
+      console.log("formData formData :",formData);
+      
       this._surveysService.sendInvitation(formData).subscribe(
         (response) => { },
         (err) => {

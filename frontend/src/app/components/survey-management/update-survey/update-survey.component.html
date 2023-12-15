@@ -4,10 +4,11 @@
   <div class="progress">
     <div class="progress-bar" [style.width]="barwidth + '%'"></div>
   </div>
-
+  <p style="font-size: 0.9vw;" class="text-justify text-wrap container-fluid text-format my-3">
+    Stay in control of your surveys. Modify the information you'd like to change and hit 'Save' to make quick and precise updates to your survey list.
+  </p>
   <form [formGroup]="form" autocomplete="off">
     <div *ngIf="!show" id="1" class="form-group col-sm-7">
-
       <div class="container-fluid my-4">
         <label for="title">Survey Title:</label>
         <input type="text" class="form-control" name="title" id="title" formControlName="title"
@@ -27,37 +28,53 @@
       </div>
     </div>
 
-    <div *ngIf="show" id="2" class="form-group"> 
+    <div id="2" *ngIf="show" class="form-group">
       <div class="row container-fluid my-4">
-        <ngx-datatable tableClass="table table-striped table-bordered table-hover" 
-      [tableId]="'checkbox'" [data]="rows" [options]="options" 
-        [columns]="columns"   (checkboxClick)="onCheckboxClick($event)" >
-        <ngx-caption>
-          <div class="row header-tab">
-            <div class="col-sm-12 col-xs-12 col-md-12 ">
-              <b>
-                <i class="bi bi-card-list"></i>
-                Questions List
-              </b>
+
+        <section class="d-flex d-grid flex-md-row flex-sm-column my-4">
+          <!-- <div class="container-fluid">
+            <label for="surveys">List of Questions:</label>
+            <div cdkDropList #todoList="cdkDropList" [cdkDropListData]="rows" [cdkDropListConnectedTo]="[doneList]"
+              class="example-list" (cdkDropListDropped)="dropDrag($event)">
+              <div style="font-size:0.8vw ;" class="example-box text-bg-light" *ngFor="let item of rows" cdkDrag>
+                {{item.text}}</div>
+            </div>
+          </div> -->
+          <div class="container-fluid">
+            <label for="surveys">List of Questions:</label>
+
+            <input type="text" [formControl]="searchText" class="mb-3" placeholder="Search questions">
+
+            <!-- <div cdkDropList #todoList="cdkDropList" [cdkDropListData]="filteredRows"
+              [cdkDropListConnectedTo]="[doneList]" class="example-list" (cdkDropListDropped)="dropDrag($event)"> -->
+
+              <div cdkDropList #todoList="cdkDropList" [cdkDropListData]="rows" [cdkDropListConnectedTo]="[doneList]"
+              class="example-list" (cdkDropListDropped)="dropDrag($event)">
+
+
+              <div style="font-size:0.8vw;" class="example-box text-bg-light" *ngFor="let item of filteredRows" cdkDrag>
+                {{ item.text }}
+              </div>
             </div>
           </div>
-        </ngx-caption>
-      </ngx-datatable>
+
+          <i class="bi bi-arrow-left-right text-primary my-5 py-5 fs-5 "></i>
+          <div class="container-fluid mt-3">
+            <div cdkDropList #doneList="cdkDropList" [cdkDropListData]="selected" [cdkDropListConnectedTo]="[todoList]"
+              class="example-list" (cdkDropListDropped)="dropDrag($event)">
+              <div style="font-size:0.8vw ;" class="example-box" *ngFor="let item of selected" cdkDrag>{{item.text}}
+              </div>
+            </div>
+          </div>
+        </section>
+
+
       </div>
     </div>
 
-    <div *ngIf="show" id="2" class="form-group">
-      <div class="row container-fluid my-4" *ngIf="chkBoxSelected.length !==0">
-        <div cdkDropList #todoList="cdkDropList" [cdkDropListData]="chkBoxSelected" class="example-list"
-          (cdkDropListDropped)="drop($event)">
-          <div class="example-box mt-2 col-md-12" *ngFor="let item of chkBoxSelected" cdkDrag>{{item.text}}</div>
-        </div>
-      </div>
-    </div>
 
     <section class="d-flex flex-row flex-wrap my-5 justify-content-end btn-">
-      <button type="submit" (click)="previous()" [disabled]="!pervshow"
-        class="d-flex d-grid gap-2 btn btn-primary px-4">
+      <button type="submit" (click)="previous()" class="d-flex d-grid gap-2 btn btn-primary px-4">
         <a href="#1"></a>
         <i class="bi bi-arrow-bar-left"></i>
         Previous

@@ -83,3 +83,17 @@ mat-sidenav-content{
 .required {
   color: red;
 }
+
+.bi-x-lg {
+  pointer-events: all !important ;
+  cursor: pointer !important ;
+}
+
+// .p-inputtext {
+//   background: white !important ;
+//   color: black;
+// }
+
+.p-panel .p-panel-header .p-panel-header-icon {
+  pointer-events: all !important;
+}

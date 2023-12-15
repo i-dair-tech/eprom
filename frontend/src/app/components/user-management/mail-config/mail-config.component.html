@@ -1,0 +1,39 @@
+<div class="global-container container-fluid col-md-12">
+  <div class="container-fluid card-Question my-4 py-3 overflow-auto">
+    <div class="col-md-12 col-12 d-flex justify-content-between flex-wrap">
+      <div class="d-flex align-content-center align-items-center">
+        <img class="add-icon" src="../../../assets/icons/icon-title.png"> &nbsp;&nbsp;
+        <h4 class="my-2"><b>Email Invitation Credentials </b></h4>
+      </div>
+    </div>
+
+    <div class="container mt-5">
+      <div class="row">
+        <div class="col-md-12">
+            <p>
+              Prepare for seamless patient survey invitations by configuring your email and password below.<br> This email will serve as the conduit to invite patients to participate in surveys, ensuring a personalized and efficient outreach process.
+            </p>
+          <form [formGroup]="credentialsForm" (ngSubmit)="submitForm()">
+            <div class="mb-6">
+              <label for="username" class="form-label">Email</label>
+              <input type="text" class="form-control" id="username" formControlName="username">
+              <!-- <div *ngIf="credentialsForm.get('username').hasError('required') && credentialsForm.get('username').touched" class="text-danger">
+                Username is required.
+              </div> -->
+            </div>
+            <div class="mb-6">
+              <label for="password" class="form-label">Password</label>
+              <input type="password" class="form-control" id="password" formControlName="password">
+              <!-- <div *ngIf="credentialsForm.get('password').hasError('required') && credentialsForm.get('password').touched" class="text-danger">
+                Password is required.
+              </div> -->
+            </div>
+            <button type="submit" class="btn btn-primary col-md-2">Confirm</button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
