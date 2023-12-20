@@ -4,7 +4,6 @@
 // export const SERVER_API_URL_BASE = 'http://3.83.44.21:8080/eprom-0.0.1-SNAPSHOT';
 //  export const SERVER_API_URL_BASE = 'https://n8n.chavi.ai';
  export const SERVER_API_URL_BASE = 'http://localhost:8080';
-//  export const SERVER_API_URL_BASE = 'http://localhost:8080';
 // export const SERVER_API_URL_BASE = '';
  export const SERVER_API_URL = SERVER_API_URL_BASE + '/api'
  
