@@ -51,7 +51,7 @@ spring:
     host: smtp-mail.outlook.com
     port: 587
     username: bilel.jarrahi@dqlick.com
-    password: Dqlick2022+
+    password: test
     protocol: smtp
     tls: true
     properties.mail.smtp:

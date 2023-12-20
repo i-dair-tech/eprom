@@ -4,8 +4,8 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class SharedObjectService {
-    private String username ="bilel.jarrahi@dqlick.com";
-    private String password="Dqlick2022+";
+    private String username ="test@gmail.com";
+    private String password="test";
     
 	public String getUsername() {
 		return username;
